@@ -77,31 +77,29 @@ Page({
         errorText: '请填写正确邮箱地址'
       })
     } else {
+      wx.showLoading({
+        title: '发送邮件中',
+      })
       post(
-        'http://192.168.0.104/newlaAdmin/index.php/Login/send_verify',
+        'http://49.51.41.227/newlaAdmin/index.php/Login/send_verify',
         { email: this.data.emailText },
         (res) => {
           console.log(res.data)
-          if (res.data.code === 201) {
-            wx.showLoading({
-              title: '发送邮件中',
+          if (res.data.code === 405 || res.data.code === 200) {
+            wx.hideLoading()
+            this.setData({
+              currentIndex: 1,
+              'topData.currentIndex': 1,
+              verify: res.data.verify,
+              finished: res.data.code === 405 ? true : false
             })
-            post(
-              'http://192.168.0.104/newlaAdmin/index.php/Login/send_verify',
-              { email: this.data.emailText },
-              (res) => {
-                wx.hideLoading()
-                console.log(res.data)
-                if (res.data.verify) {
-                  this.setData({
-                    verify: res.data.verify,
-                    currentIndex: 1,
-                    'topData.currentIndex': 1,
-                    finished: true
-                  })
-                  this.timeoutAgin()
-                }
-              })
+          }
+          if (res.data.code === 401) {
+            this.setData({
+              email: true,
+              emailText: '该邮箱已被绑定,请更换邮箱'
+            })
+            this.timeoutError()
           }
         }
       )
@@ -151,11 +149,21 @@ Page({
         errorText: '请填写正确的验证码'
       })
     } else {
-      // if () { }
-      this.setData({
-        currentIndex: 2,
-        'topData.currentIndex': 2
-      })
+      if (this.data.finished) {
+        post('http://49.51.41.227/newlaAdmin/index.php/Login/bind',
+          {
+            email: this.data.emailText,
+            openId: app.globalData.openId
+          },
+          (res) => {
+            console.log(res)
+          })
+      } else {
+        this.setData({
+          currentIndex: 2,
+          'topData.currentIndex': 2
+        })
+      }
     }
     this.timeoutError()
   },
@@ -210,7 +218,7 @@ Page({
         title: '验证中',
       })
       post(
-        'http://192.168.0.104/newlaAdmin/index.php/Login/register',
+        'http://49.51.41.227/newlaAdmin/index.php/Login/register',
         {
           email: this.data.emailText,
           password: this.data.passwordText,

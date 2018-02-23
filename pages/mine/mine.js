@@ -46,7 +46,7 @@ Page({
             success: function (openIdRes) {
               if (openIdRes.data.openid != null & openIdRes.data.openid != undefined) {
                 post(
-                  'http://192.168.0.104/newlaAdmin/index.php/Login/weChatCheck',
+                  'http://49.51.41.227/newlaAdmin/index.php/Login/weChatCheck',
                   { openId: openIdRes.data.openid },
                   (res) => {
                     console.log(res.data)

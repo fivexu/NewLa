@@ -1,10 +1,10 @@
 {
   "pages": [
-   "pages/release/release",
+   
     "pages/mine/mine",
     "pages/welcome/welcome",
     "pages/home/home",
-    
+    "pages/release/release",
     "pages/user/user",
     "pages/seller/seller",
     "pages/about/about",
