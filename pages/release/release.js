@@ -25,6 +25,7 @@ Page({
     oldPriceVal: '',
     statusVal: '',
     wechatVal: '',
+    phoneVal: '',
     labelList: [],
     statusNumber: false,
     address: '请选择您的位置',
@@ -186,23 +187,12 @@ Page({
       })
     } else {
       wx.showLoading({
-        title: '加载中',
+        title: '正在提交',
       })
-      let _this = this
-      setTimeout(function () {
-        wx.hideLoading()
-        wx.showToast({
-          title: '已提交审核',
-          icon: 'success',
-          duration: 2000
-        })
-        if (wx.getStorageSync('address')) {
-          wx.removeStorageSync('address')
-        }
-        wx.switchTab({
-          url: '../../pages/release/release'
-        })
-      }, 2000)
+      if (wx.getStorageSync('address')) {
+        wx.removeStorageSync('address')
+      }
+      this.fromContent(val)
     }
     setTimeout(() => {
       this.setData({
@@ -232,7 +222,6 @@ Page({
         }
       })
     }
-    console.log(spikeTime)
     wx.request({
       url: 'http://49.51.41.227/newlaAdmin/index.php/goods/uploadGoods',
       method: 'POST',
@@ -254,6 +243,12 @@ Page({
       success: function (res) {
         console.log(val)
         console.log(res.data)
+        wx.hideLoading()
+        wx.showToast({
+          title: '发布成功',
+          icon: 'success',
+          duration: 1000
+        })
         _this.setData({
           errorText: '',
           imageSrc: [],
@@ -272,7 +267,7 @@ Page({
           oldPriceVal: '',
           statusVal: '',
           wechatVal: '',
-          labelList: [],
+          phoneVal: '',
           statusNumber: false,
           address: '请选择您的位置',
           productText: '商品种类',
@@ -291,8 +286,7 @@ Page({
   },
   formSubmit(ev) {
     let val = ev.detail.value
-    // this.testFrom(val)
-    this.fromContent(val)
+    this.testFrom(val)
   },
   deleteImg(ev) {
     let arrs = []

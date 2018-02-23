@@ -1,14 +1,14 @@
 {
   "pages": [
-    "pages/sign/bind/bind",
+   "pages/release/release",
     "pages/mine/mine",
     "pages/welcome/welcome",
     "pages/home/home",
-    "pages/release/release",
+    
     "pages/user/user",
     "pages/seller/seller",
     "pages/about/about",
-   
+   "pages/sign/bind/bind",
     "pages/sign/getback/getback",
     "pages/sign/registered/registered",
     "pages/sign/login/login",
