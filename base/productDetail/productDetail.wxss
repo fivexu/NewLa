@@ -1,0 +1,433 @@
+#productDetail, page {
+  width: 100%;
+  min-height: 100%;
+  background-color: #f9f9f9;
+}
+
+#productDetail .header {
+  width: 100%;
+  height: 310rpx;
+  box-shadow: 0 0 16rpx 0 #999;
+  text-align: center;
+  border-radius: 0 0 25rpx 25rpx;
+  position: relative;
+}
+
+#productDetail .header >.mode {
+  width: 100%;
+  height: 100%;
+  border-radius: 0 0 25rpx 25rpx;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+}
+
+#productDetail .header >image {
+  width: 100%;
+  height: 310rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 0 0 25rpx 25rpx;
+  overflow: hidden;
+}
+
+#productDetail .header .user {
+  width: 100%;
+  padding-top: 186rpx;
+  font-size: 28rpx;
+  color: #333;
+  position: relative;
+  z-index: 10;
+  font-family: 'PingFang-SC-Medium';
+}
+
+#productDetail .header .user >image {
+  width: 160rpx;
+  height: 160rpx;
+  border: 4rpx solid #c5c5c5;
+  border-radius: 50%;
+  margin-bottom: 30rpx;
+}
+
+#productDetail .content {
+  padding: 140rpx 40rpx 0;
+}
+
+#productDetail .content .title {
+  font-size: 34rpx;
+  color: #1a1a1a;
+  height: 34rpx;
+  line-height: 34rpx;
+  text-align: center;
+}
+
+#productDetail .content .flow {
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 24rpx;
+  color: #666;
+  text-align: center;
+}
+
+#productDetail .content .release_time {
+  font-size: 24rpx;
+  color: #1a1a1a;
+  text-align: center;
+}
+
+#productDetail .content .price {
+  width: 100%;
+  margin-top: 70rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  font-size: 32rpx;
+}
+
+#productDetail .content .price .now {
+  color: #fa6639;
+  padding-right: 24rpx;
+}
+
+#productDetail .content .price .old {
+  text-decoration: line-through;
+  color: #999;
+}
+
+#productDetail .content .shelf_time {
+  color: #fa6639;
+  padding-top: 34rpx;
+  font-weight: bolder;
+}
+
+#productDetail .content .position {
+  height: 24rpx;
+  line-height: 24rpx;
+  font-size: 24rpx;
+  color: #666;
+  padding: 40rpx 0;
+}
+
+#productDetail .content .position image {
+  width: 21rpx;
+  height: 28rpx;
+  margin: -2rpx 10rpx 0 0;
+}
+
+#productDetail .content .label {
+  height: 38rpx;
+  line-height: 38rpx;
+  text-align: center;
+  padding-bottom: 40rpx;
+}
+
+#productDetail .content .label_item {
+  width: 80rpx;
+  height: 38rpx;
+  background-color: #e6e6e6;
+  border-radius: 5rpx;
+  float: left;
+  margin-right: 30rpx;
+  font-size: 28rpx;
+  color: #666;
+}
+
+#productDetail .content .label_item.ac {
+  background-color: #fa6639;
+  color: #fff;
+}
+
+#productDetail .content .content_detail {
+  font-size: 28rpx;
+  line-height: 42rpx;
+  color: #1a1a1a;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+#productDetail .content .pic {
+  width: 100%;
+  font-size: 0;
+}
+
+#productDetail .content .pic image {
+  width: 100%;
+  padding: 15rpx 0;
+}
+
+#productDetail .comment {
+  width: 100%;
+  margin-top: 40rpx;
+  text-align: center;
+}
+
+#productDetail .comment .title {
+  width: 100%;
+  height: 12rpx;
+  background-color: #ffda44;
+  margin-top: 40rpx;
+  text-align: center;
+}
+
+#productDetail .comment .title >text {
+  text-align: center;
+  display: block;
+  padding: 0 15rpx;
+  width: 200rpx;
+  height: 28rpx;
+  line-height: 12rpx;
+  margin: 0 auto;
+  font-size: 28rpx;
+  font-weight: bolder;
+  color: #1a1a1a;
+  background-color: #f9f9f9;
+}
+
+#productDetail .comment .comment_list {
+  padding: 48rpx 40rpx 90rpx;
+  height: fit-content;
+}
+
+#productDetail .comment .comment_list .comment_item .user_wrapper.ac {
+  padding-left: 70rpx;
+  height: fit-content;
+}
+
+#productDetail .comment .comment_list .comment_item .user_wrapper .user {
+  height: 56rpx;
+  line-height: 56rpx;
+  font-size: 0;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+#productDetail .comment .comment_list .comment_item .user_wrapper .user image {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+#productDetail .comment .comment_list .comment_item .user_wrapper .user text {
+  font-size: 28rpx;
+  color: #1a1a1a;
+  font-weight: bolder;
+}
+
+#productDetail .comment .comment_list .comment_item .user_wrapper .user_talk {
+  font-size: 28rpx;
+  color: #333;
+  padding: 40rpx 0 40rpx 70rpx;
+  line-height: 42rpx;
+  text-align: left;
+}
+
+#productDetail .comment .comment_list .comment_item .user_wrapper .talk_time {
+  font-size: 24rpx;
+  color: #666;
+  padding: 0 0 40rpx 70rpx;
+  text-align: left;
+}
+
+#productDetail .comment .comment_list .comment_item .user_wrapper .talk_time image {
+  width: 24rpx;
+  height: 24rpx;
+  float: right;
+  margin-top: 4rpx;
+}
+
+#productDetail .operating {
+  width: 100%;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+  height: 90rpx;
+  line-height: 92rpx;
+  background-color: #f2f2f2;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 400;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+#productDetail .operating .operating_item {
+  font-size: 28rpx;
+}
+
+#productDetail .operating .operating_item image {
+  display: block;
+  width: 28rpx;
+  height: 28rpx;
+  margin: 32rpx 14rpx 0 0;
+  float: left;
+}
+
+#productDetail .operating .operating_phone {
+  width: 200rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  background-color: #ffda44;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  color: #1a1a1a;
+  margin-top: 12rpx;
+  text-align: center;
+}
+
+#productDetail .speech_text {
+  width: 100%;
+  height: 270rpx;
+  background-color: #fff;
+  padding: 20rpx 40rpx 0;
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  bottom: 0;
+}
+
+#productDetail .speech_text textarea {
+  width: 598rpx;
+  height: 230rpx;
+  background-color: #f2f2f2;
+  border-radius: 8rpx;
+  float: right;
+}
+
+#productDetail .speech_text text {
+  float: left;
+  font-size: 28rpx;
+  color: #b3b3b3;
+}
+
+#productDetail .phone_to {
+  width: 630rpx;
+  height: fit-content;
+  padding-top: 70rpx;
+  background-color: #fff;
+  border-radius: 25rpx;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+  color: #1a1a1a;
+}
+
+#productDetail .phone_to .code {
+  width: 280rpx;
+  height: fit-content;
+  margin: 0 auto;
+  padding-bottom: 40rpx;
+}
+
+#productDetail .phone_to .code image {
+  width: 280rpx;
+  height: 280rpx;
+}
+
+#productDetail .phone_to .text {
+  height: 34rpx;
+  line-height: 34rpx;
+}
+
+#productDetail .phone_to .phone_number {
+  height: 34rpx;
+  line-height: 34rpx;
+  font-size: 34rpx;
+  padding-bottom: 70rpx;
+}
+
+#productDetail .phone_to .btn {
+  width: 100%;
+  height: 96rpx;
+  line-height: 96rpx;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  border-top: 1rpx solid #e6e6e6;
+}
+
+#productDetail .phone_to .btn_item {
+  flex: 1;
+  font-size: 36rpx;
+}
+
+#productDetail .phone_to .btn_item.ac {
+  border-left: 1rpx solid #e6e6e6;
+  color: #fa6639;
+}
+
+#productDetail .share_to {
+  width: 100%;
+  height: 348rpx;
+  padding-top: 46rpx;
+  box-sizing: border-box;
+  background-color: #e7e7e7;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+#productDetail .share_to .top {
+  width: 100%;
+  height: 204rpx;
+  background-color: #e7e7e7;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+}
+
+#productDetail .share_to .share_wrapper {
+  margin-right: 24rpx;
+  float: left;
+  width: 134rpx;
+  font-size: 22rpx;
+  color: #595959;
+  text-align: center;
+  line-height: 44rpx;
+}
+
+#productDetail .share_to .top .share_item {
+  width: 120rpx;
+  height: 120rpx;
+  background-color: #fff;
+  border-radius: 25rpx;
+  margin: 0 auto;
+}
+
+#productDetail .share_to .top .share_item image {
+  width: 60rpx;
+  height: 60rpx;
+  margin: 30rpx;
+  float: left;
+}
+
+#productDetail .share_to .bot {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: #fff;
+  text-align: center;
+  font-size: 36rpx;
+  color: #333333;
+}
+
+#productDetail .model {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  bottom: 0;
+}

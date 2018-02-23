@@ -1,0 +1,63 @@
+#login {
+  padding: 100rpx 60rpx 0;
+  background-color: #fafafa;
+}
+
+#login, page {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: #fafafa;
+}
+
+#login form {
+  display: block;
+}
+
+#login form input {
+  height: 100%;
+  caret-color: #ffda44;
+}
+
+#login form .username, #login form .password {
+  width: 100%;
+  font-size: 34rpx;
+  height: 96rpx;
+  border-bottom: 1px solid #999;
+  position: relative;
+}
+
+#login form .sign_in {
+  margin-top: 30rpx;
+  width: 100%;
+  font-size: 34rpx;
+  height: 96rpx;
+  line-height: 96rpx;
+  border: none;
+  background-color: #ffda44;
+  border-radius: 8px;
+}
+
+#login form .password image {
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  width: 34rpx;
+  height: 24rpx;
+  float: left;
+  transition: all 0.3s;
+}
+
+#login .other {
+  font-size: 26rpx;
+  color: #999;
+  float: right;
+  margin-top: 36rpx;
+}
+
+#login .other text {
+  margin-left: 26rpx;
+}

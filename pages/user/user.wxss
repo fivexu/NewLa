@@ -1,0 +1,116 @@
+#user, page {
+  width: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+#user {
+  padding: 0 40rpx;
+}
+
+#user .user_item {
+  width: 100%;
+  height: 196rpx;
+  border-bottom: 1rpx solid #e6e6e6;
+}
+
+#user .user_item .text {
+  font-size: 40rpx;
+}
+
+#user .user_item:last-of-type {
+  border-bottom: none;
+}
+
+#user .user_item.ac {
+  height: 196rpx;
+  line-height: 196rpx;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+#user .user_item .title {
+  font-size: 32rpx;
+  height: 98rpx;
+  line-height: 98rpx;
+  color: #666;
+}
+
+#user .user_item.ac .title.ac {
+  font-size: 32rpx;
+  height: 196rpx;
+  line-height: 196rpx;
+}
+
+#user .user_item image {
+  width: 168rpx;
+  height: 168rpx;
+  border-radius: 10rpx;
+  margin-top: 15rpx;
+}
+
+#user .user_item input {
+  height: 98rpx;
+  line-height: 98rpx;
+  font-size: 40rpx;
+  color: #333;
+}
+
+#user button {
+  background-color: #ffda44;
+  border: none !important;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 8px;
+  font-size: 32rpx;
+}
+
+#user .model {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+}
+
+#user .sex {
+  width: 100%;
+  height: 300rpx;
+  line-height: 100rpx;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+  transition: all 0.3s;
+}
+
+#user .sex .title {
+  width: 100%;
+  height: 100rpx;
+  background-color: #ffda44;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+  font-size: 32rpx;
+  text-align: left;
+}
+
+#user .sex .sex_item {
+  width: 100%;
+  height: 100rpx;
+  background-color: #fff;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+  font-size: 32rpx;
+  text-align: center;
+}
+
+.signOut {
+  padding: 50rpx 0 70rpx;
+  font-size: 28rpx;
+  color: rgb(128, 128, 128);
+  text-align: center;
+  text-decoration: underline;
+}

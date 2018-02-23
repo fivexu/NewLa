@@ -1,0 +1,30 @@
+#address {
+  padding: 0 40rpx;
+}
+
+.city_list .select {
+  height: 78rpx;
+  line-height: 78rpx;
+  font-size: 24rpx;
+  position: relative;
+  border-top: 1px solid #f2f2f2;
+}
+
+.city_list .select image {
+  width: 14rpx;
+  height: 7rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  transform: rotate(180deg);
+  transition: all 0.3s;
+}
+
+.city_list .scroll_view {
+  height: 160rpx;
+  line-height: 160rpx;
+  color: rgb(102, 102, 102);
+  font-size: 24rpx;
+}

@@ -1,0 +1,15 @@
+<template name='top'>
+  <view class='top'>
+    <view class='{{currentIndex===0?"ac":""}}'>
+      1.{{first}}
+    </view>
+    <image src='../top/right.png'></image>
+    <view class='{{currentIndex===1?"ac":""}}'>
+      2.{{next}}
+    </view>
+    <image src='../top/right.png' wx:if='{{last}}'></image>
+    <view wx:if='{{last}}' class='{{currentIndex===2?"ac":""}}'>
+      3.{{last}}
+    </view>
+  </view>
+</template>

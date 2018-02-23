@@ -1,0 +1,35 @@
+<view id='mine'>
+  <view class='user'>
+    <view class='avatar' catchtap='toUserInfo'>
+      <image src='{{userInfo.avatarUrl?userInfo.avatarUrl:"./contact.png"}}'></image>
+    </view>
+    <view class='sign' catchtap='login' wx:if='{{!userInfo.nickName}}'>
+      <text>登录/注册</text>
+    </view>
+    <view class='sign' wx:if='{{userInfo.nickName}}' catchtap='toUserInfo'>
+      <text>{{userInfo.nickName}}</text>
+    </view>
+  </view>
+  <view class='list'>
+    <view wx:if='{{userInfo.nickName}}' class='list_item' catchtap='release'>
+      <image class='icon' src='./release.png'></image>
+      <text>我发布的</text>
+      <image class='right' src='../../common/images/right.png'></image>
+    </view>
+    <view wx:if='{{userInfo.nickName}}' class='list_item' catchtap='collect'>
+      <image class='icon' src='./collect.png'></image>
+      <text>我收藏的</text>
+      <image class='right' src='../../common/images/right.png'></image>
+    </view>
+    <view wx:if='{{userInfo.nickName}}' class='list_item' catchtap='comment'>
+      <image class='icon' src='./comment.png'></image>
+      <text>我的评论/回复</text>
+      <image class='right' src='../../common/images/right.png'></image>
+    </view>
+    <view class='list_item' catchtap='contact'>
+      <image class='icon' src='./contact.png'></image>
+      <text>关于我们</text>
+      <image class='right' src='../../common/images/right.png'></image>
+    </view>
+  </view>
+</view>

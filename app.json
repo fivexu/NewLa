@@ -1,0 +1,56 @@
+{
+  "pages": [
+    "pages/sign/bind/bind",
+    "pages/mine/mine",
+    "pages/welcome/welcome",
+    "pages/home/home",
+    "pages/release/release",
+    "pages/user/user",
+    "pages/seller/seller",
+    "pages/about/about",
+   
+    "pages/sign/getback/getback",
+    "pages/sign/registered/registered",
+    "pages/sign/login/login",
+    "pages/sign/alter/alter",
+    "pages/mineItem/myComment/myComment",
+    "pages/mineItem/myCollect/myCollect",
+    "pages/mineItem/myRelease/myRelease",
+    "base/productDetail/productDetail",
+    "base/protocol/protocol",
+    "base/address/address",
+    "base/report/report",
+    "base/search/search"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffd944",
+    "navigationBarTitleText": "NewLA",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#fff"
+  },
+  "tabBar": {
+    "color": "#1a1a1a",
+    "selectedColor": "#ffda44",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "common/images/home.png",
+        "selectedIconPath": "common/images/homeAc.png"
+      },
+      {
+        "pagePath": "pages/release/release",
+        "text": "发布",
+        "iconPath": "common/images/release.png",
+        "selectedIconPath": "common/images/releaseAc.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "common/images/mine.png",
+        "selectedIconPath": "common/images/mineAc.png"
+      }
+    ]
+  }
+}

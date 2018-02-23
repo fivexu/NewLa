@@ -1,0 +1,5 @@
+#protocol {
+  padding: 40rpx;
+  font-size: 30rpx;
+  line-height: 34rpx;
+}

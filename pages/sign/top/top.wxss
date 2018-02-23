@@ -1,0 +1,26 @@
+.top {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 26rpx;
+  padding: 0 60rpx;
+  background-color: #fff;
+  transition: all 0.3s;
+}
+
+.top .ac {
+  color: #fa6639;
+}
+
+.top text {
+  flex: 3;
+}
+
+.top image {
+  width: 14rpx;
+  height: 24rpx;
+  float: left;
+  margin-top: 28rpx;
+}

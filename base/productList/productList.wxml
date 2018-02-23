@@ -1,0 +1,26 @@
+<template name='productList'>
+  <view class='productList'>
+    <view class='pics'>
+      <view wx:for='{{img}}' wx:key='index'>
+        <image src='{{item.src}}' lazy-load='../../common/images/loading.png'></image>
+      </view>
+    </view>
+    <view class='title'>{{title}}
+      <view class='time'>{{time}}</view>
+    </view>
+    <view class='address clearfix'>
+      <view class='float_l'>
+        <image src='../../common/images/nav2.png'></image> 来自 {{address}}
+      </view>
+      <view class='float_l' style='margin-top:8rpx;'>
+        <view class='label ac'>秒杀</view>
+        <view class='label'>家具</view>
+        <view class='label'>可爱</view>
+      </view>
+      <view class='float_r'>
+        <text class='old'>${{oldPrice}}</text>
+        <text class='now'>$<text class='nowAc'>{{nowPrice}}</text></text>
+      </view>
+    </view>
+  </view>
+</template>

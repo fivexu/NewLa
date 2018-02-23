@@ -1,0 +1,32 @@
+#report, page {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+}
+#report {
+  padding: 40rpx;
+}
+
+#report textarea {
+  padding: 20rpx;
+  width: 100%;
+  box-sizing: border-box;
+  height: 360rpx;
+  background-color: #fff;
+  border-radius: 8rpx;
+  color: #333;
+  font-size: 28rpx;
+}
+
+#report .submit {
+  text-align: center;
+  margin-top: 40rpx;
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #ffda44;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  color: #1a1a1a;
+}

@@ -1,0 +1,83 @@
+#comment, page {
+  width: 100%;
+  min-height: 100%;
+  background-color: #f9f9f9;
+}
+
+#comment .tabs {
+  width: 100%;
+  height: 92rpx;
+  line-height: 92rpx;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  font-size: 28rpx;
+  color: #333;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #fff;
+}
+
+#comment .tabs .tabs_item {
+  flex: 1;
+}
+
+#comment .tabs .tabs_item.ac {
+  font-weight: bolder;
+  border-bottom: 6rpx solid #ffda44;
+}
+
+#comment .comment_list {
+  padding: 120rpx 40rpx 90rpx;
+  height: fit-content;
+}
+
+#comment .comment_list .comment_item .user_wrapper .user {
+  height: 56rpx;
+  line-height: 56rpx;
+  font-size: 0;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+#comment .comment_list .comment_item .user_wrapper .user image {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+#comment .comment_list .comment_item .user_wrapper .user text {
+  font-size: 28rpx;
+  color: #1a1a1a;
+  font-weight: bolder;
+}
+
+#comment .comment_list .comment_item .user_wrapper .user_talk {
+  font-size: 28rpx;
+  color: #333;
+  padding: 40rpx 0 40rpx 70rpx;
+  line-height: 42rpx;
+  text-align: left;
+}
+
+#comment .comment_list .comment_item .user_wrapper .talk_time {
+  font-size: 24rpx;
+  color: #666;
+  padding: 0 0 40rpx 70rpx;
+  text-align: left;
+}
+
+#comment .comment_list .comment_item .user_wrapper .from {
+  height: 68rpx;
+  line-height: 68rpx;
+  font-size: 28rpx;
+  color: #4d4d4d;
+  padding: 0 20rpx;
+  margin: 0 0 40rpx 70rpx;
+  background-color: #ededed;
+  border-radius: 8rpx;
+}

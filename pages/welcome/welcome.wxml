@@ -1,0 +1,4 @@
+<view id='welcome'>
+  <view class='to_home' catchtap='toHome'>{{time}}s跳过</view>
+  <image mode='scaleToFill' src='../../common/images/welcome.jpg'></image>
+</view>

@@ -1,0 +1,81 @@
+@import '../top/top.wxss';
+
+#alter, page {
+  width: 100%;
+  min-height: 100%;
+  background-color: #fafafa;
+}
+
+#alter .item {
+  padding: 0 60rpx;
+}
+
+#alter .item input {
+  caret-color: #ffda44;
+  height: 96rpx;
+  line-height: 96rpx;
+  font-size: 34rpx;
+  margin-top: 40rpx;
+  border-bottom: 1rpx solid #999;
+}
+
+#alter .item button {
+  height: 96rpx;
+  line-height: 96rpx;
+  background-color: #e6e6e6;
+  border-radius: 8rpx;
+  border: none !important;
+  margin-top: 40rpx;
+}
+
+#alter .item .input {
+  width: 100%;
+  height: 96rpx;
+  border-bottom: 1rpx solid #999;
+  font-size: 34rpx;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+#alter .item .input input {
+  margin: 0;
+}
+
+#alter .item .input image {
+  width: 34rpx;
+  height: 24rpx;
+  float: right;
+  margin-top: 36rpx;
+}
+
+#alter .item .input .agin {
+  width: 140rpx;
+  height: 64rpx;
+  margin-top: 16rpx;
+  line-height: 64rpx;
+  text-align: center;
+  font-size: 24rpx;
+  background-color: #e6e6e6;
+  border-radius: 8rpx;
+  color: #ccc;
+}
+
+#alter .item .input .agin.ac {
+  background-color: #ffda44;
+  color: #333;
+}
+
+.error {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  background-color: #e64340;
+  color: #fff;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+}

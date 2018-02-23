@@ -1,0 +1,116 @@
+<form id='from' bindsubmit='formSubmit'>
+  <view class='error' wx:if='{{errorText!==""}}'>{{errorText}}</view>
+  <view class='message' style='padding-top:{{errorText!==""?"60rpx":"0"}}'>
+    <view class='title'>
+      <input name='title' maxlength='20' type='text' value='{{titleVal}}' placeholder-style='color:#ccc' style='text-align: left;' placeholder='{{modalShow?"":"标题"}}'></input>
+    </view>
+    <view class='description'>
+      <textarea value='{{descriptionVal}}' name='description' placeholder-style='color:#ccc' placeholder='{{modalShow?"":"请描述宝贝详情"}}' maxlength='500' disabled='{{modalShow}}'></textarea>
+    </view>
+    <view class='pic clearfix'>
+      <view class='images' wx:for='{{imageSrc}}' data-index='{{index}}' wx:key='index'>
+        <image mode='center' src='{{item}}' data-index='{{index}}' catchtap='openImg'></image>
+        <view class='first' wx:if='{{index===0}}'>主图</view>
+        <view class='delete'>
+          <image src='./delete.png' data-index='{{index}}' catchtap='deleteImg'></image>
+        </view>
+      </view>
+      <view class='camera' catchtap='openCamera' wx:if='{{imageSrc.length<8}}'>
+        <image src='./camera.png'></image>
+        <view class='text'>请添加</view>
+        <view class='text'>3至8张照片</view>
+      </view>
+    </view>
+    <view class='address' catchtap='toAddress'>
+      <image src='./nav.png'></image>
+      <view class='text'>{{address}}</view>
+    </view>
+  </view>
+  <view class='content'>
+    <view class='price'>
+      <view class='now_price'>
+        <view class='title'>价格</view>
+        <input value='{{nowPriceVal}}' class='ac' name='nowPrice' type='digit' confirm-type='确定' placeholder-style='color:#ccc' placeholder='$0.00'></input>
+      </view>
+      <view class='old_price'>
+        <view class='title'>原价</view>
+        <input value='{{oldPriceVal}}' class='ac' name='oldPrice' type='digit' placeholder-style='color:#ccc' placeholder='$0.00'></input>
+      </view>
+    </view>
+    <view class='select' catchtap='product'>
+      <view class='title'>{{productText}}</view>
+      <image src='../../common/images/right.png'></image>
+    </view>
+    <view class='select' style='height:{{spikeShow?"192rpx":"96rpx"}}'>
+      <view class='clearfix '>
+        <view class='title'>秒杀商品</view>
+        <view class='button' catchtap='spike' style='background-color:{{spikeShow?"#ffda44":"#e6e6e6"}}'>
+          <view class='btn' style='left:{{spikeShow?"88rpx":"6rpx"}};box-shadow:{{spikeShow?"0 0 4px 0 rgb(255,169,68)":"0 0 0 0 rgba(255,169,68,0)"}}'></view>
+        </view>
+      </view>
+      <view class='time' wx:if='{{spikeShow}}' catchtap='setTime'>
+        <text>{{year}}年{{month}}月{{day}}日</text>
+        <view>{{hour}}点
+          <image src='./rank.png'></image>
+        </view>
+        <text style='color:rgb(255,75,20)'>下架</text>
+      </view>
+    </view>
+    <view class='select'>
+      <view class='title'>新旧程度</view>
+      <input value='{{statusVal}}' name='status' maxlength='3' type='digit' placeholder-style='color:#ccc' placeholder='请输入几成新'></input>
+      <text style='text-align: right;float:right;'>成新</text>
+    </view>
+    <view class='select'>
+      <view class='title'>联系电话</view>
+      <input value='{{phoneVal}}' name='phone' type='number' placeholder-style='color:#ccc' placeholder='请输入电话'></input>
+    </view>
+    <view class='select'>
+      <view class='title'>微信号</view>
+      <input value='{{wechatVal}}' name='wechat' type='text' placeholder-style='color:#ccc' placeholder='非必填'></input>
+      <image class='wechat' catchtap='openCameraWeChart' src='{{wechatAc?"./wechatAc.png":"wechat.png"}}'></image>
+    </view>
+    <view class='select' style='height:220rpx;'>
+      <view class='clearfix'>
+        <view class='title'>标签</view>
+        <text style='text-align: right;float:right;color:#ccc;'>请选择标签(只能添加一个哦)</text>
+      </view>
+      <view class='label'>
+        <view class='{{currentLabel===index?"label_item ac":"label_item"}}' wx:for='{{labelList}}' wx:key='index' wx:for-item='item' data-index='{{index}}' data-item='{{item}}' catchtap='labelChange'>{{item}}</view>
+        <input name='label' placeholder='其他' placeholder-style='color:#ccc;' class='{{currentLabel==="other"?"label_item ac":"label_item"}}' data-index='other' catchtap='labelChange' maxlength='2'></input>
+      </view>
+    </view>
+  </view>
+  <button form-type='submit'>发布</button>
+  <view style='height:40rpx;'></view>
+  <view class='modal' wx:if='{{modalShow}}' catchtouchmove='prevent'>
+    <view class='mode' catchtap='close'></view>
+    <view class='product_class' wx:if='{{productShow}}' style='transform: translateY({{productShowAc?0:"100%"}})'>
+      <view class='title'>商品种类
+        <view class='float_r' catchtap='close'>确定</view>
+      </view>
+      <view class='class_item' wx:if='{{index!==0}}' wx:for='{{productClass}}' wx:key='index' wx:iten='item' catchtap='selectProduct' data-product='{{item}}'>
+        {{item}}
+      </view>
+    </view>
+    <view class='spike_class' wx:if='{{spikeShowTime}}' style='transform: translateY({{spikeShowAc?0:"100%"}})'>
+      <view class='title'>下架时间
+        <view class='float_r' catchtap='close'>确定</view>
+      </view>
+      <picker-view class='picker_view' indicator-class="indicator" mask-class='mask' value="{{value}}" bindchange="bindChange">
+        <picker-view-column>
+          <view wx:for="{{years}}" wx:key='index' style="line-height: 60rpx;">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{months}}" wx:key='index' style="line-height: 60rpx;">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{days}}" wx:key='index' style="line-height: 60rpx;">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{hours}}" wx:key='index' style="line-height: 60rpx;">{{item}}</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+  </view>
+</form>

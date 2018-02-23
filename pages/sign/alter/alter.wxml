@@ -1,0 +1,20 @@
+<import src="../top/top.wxml" />
+
+<view id='alter'>
+  <template is='top' data='{{...topData}}'></template>
+  <view class='item' wx:if='{{currentIndex===0}}'>
+    <input bindinput='inputIn' placeholder='请输入旧密码' placeholder-class='color:#ccc'></input>
+    <button disabled='{{!oldPassword}}' style='background-color: {{oldPassword?"#ffda44":"#e6e6e6"}};' catchtap='nextTo'>下一步</button>
+  </view>
+  <view class='item' wx:if='{{currentIndex==1}}'>
+    <view class='input'>
+      <input type='text' password='{{passwordShow?false:true}}' bindblur='userPassword' bindinput='userPassword' placeholder='请输入密码' placeholder-class='color:#ccc'></input>
+      <image catchtap='showPassword' src='{{passwordShow?             "../../../common/images/passwordAc.png":"../../../common/images/password.png"}}'></image>
+    </view>
+    <view class='input'>
+      <input type='text' password='{{passwordShow?false:true}}' bindblur='userConfirmPassword' bindinput='userConfirmPassword' placeholder='请确认密码' placeholder-class='color:#ccc'></input>
+    </view>
+    <button catchtap='finish' style='background-color:{{passwordSame?"#ffda44":"#e6e6e6"}}'>完成</button>
+  </view>
+  <view class='error' wx:if='{{error}}'>{{errorText}}</view>
+</view>

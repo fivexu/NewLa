@@ -1,0 +1,24 @@
+<import src="../../base/productList/productList.wxml" />
+
+<view id='seller'>
+  <view class='user'>
+    <view class='avatar'>
+      <image src='{{userInfo.avatarUrl?userInfo.avatarUrl:"../../common/images/talk.png"}}'></image>
+    </view>
+    <view class='sign'>用户A</view>
+    <view class='message'>
+      <view class='message_item'>
+        <view>发布</view>
+        <view class='text'>1</view>
+      </view>
+      <view class='message_item'>
+        <view>所在地</view>
+        <view class='text'>A城</view>
+      </view>
+    </view>
+  </view>
+  <view class='product_lists' wx:for='{{productList}}' wx:key='item' data-detail='{{item}}' bindtap='toDetail'>
+    <template is='productList' data='{{...item}}'></template>
+  </view>
+  <view class='more'>没有更多了哦</view>
+</view>

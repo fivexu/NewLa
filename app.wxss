@@ -1,0 +1,79 @@
+/**app.wxss**/
+
+body, h1, h2, h3, h4, h5, h6, ul, ol, li, p, input, option, textarea, dl, dd, dt {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  user-select: none;
+  background-color: #f8fbfb;
+  font-size: 24rpx;
+  font-family: 'PingFang sc medium'!important;
+  color: #333;
+  width: 100%;
+  height: 100%;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img, input {
+  border: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+i, em {
+  font-style: normal;
+}
+
+.float_l {
+  float: left;
+}
+
+.float_r {
+  float: right;
+}
+
+.show {
+  display: block !important;
+}
+
+.hide {
+  display: none;
+}
+
+.clearfix:after {
+  content: "";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  float: left;
+}
+
+.text_hide {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}

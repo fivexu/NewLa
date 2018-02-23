@@ -1,0 +1,4 @@
+<view id='report'>
+  <textarea maxlength='200' placeholder='请填写举报原因' placeholder-style='color:#ccc'></textarea>
+  <view class='submit'>提交</view>
+</view>

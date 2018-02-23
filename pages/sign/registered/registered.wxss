@@ -1,0 +1,112 @@
+@import '../top/top.wxss';
+
+#registered, page {
+  width: 100%;
+  height: 100%;
+  background-color: #fafafa;
+}
+
+#registered input {
+  caret-color: #ffda44;
+}
+
+#registered .item {
+  padding: 0 60rpx;
+}
+
+#registered .item .input {
+  width: 100%;
+  height: 96rpx;
+  border-bottom: 1rpx solid #999;
+  font-size: 34rpx;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+#registered .item .input input {
+  height: 100%;
+}
+
+#registered .item .input image {
+  width: 34rpx;
+  height: 24rpx;
+  float: right;
+  margin-top: 36rpx;
+}
+
+#registered .item .input .agin {
+  width: 140rpx;
+  height: 64rpx;
+  margin-top: 16rpx;
+  line-height: 64rpx;
+  text-align: center;
+  font-size: 24rpx;
+  background-color: #e6e6e6;
+  border-radius: 8rpx;
+  color: #ccc;
+}
+
+#registered .item .input .agin.ac {
+  background-color: #ffda44;
+  color: #333;
+}
+
+#registered .item button {
+  margin-top: 34rpx;
+  width: 100%;
+  height: 96rpx;
+  line-height: 96rpx;
+  border: none !important;
+  font-size: 34rpx;
+  background-color: #ffda44;
+}
+
+#registered .text {
+  padding: 30rpx 60rpx 0;
+  font-size: 26rpx;
+  color: #999;
+  vertical-align: middle;
+}
+
+#registered .text .btn {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1px solid #ffda44;
+  float: left;
+  position: relative;
+  margin-right: 5px;
+  transition: all 0.3s;
+  vertical-align: middle;
+}
+
+#registered .text .btn .dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #ffda44;
+  transition: all 0.3s;
+  vertical-align: middle;
+}
+
+.error {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  background-color: #e64340;
+  color: #fff;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  font-size: 28rpx;
+}

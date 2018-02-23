@@ -1,0 +1,90 @@
+<import src="../../base/productList/productList.wxml" />
+
+<view id='home'>
+  <scroll-view scroll-y='true' style='height:100%' bindscrolltolower='scrolled' bindscroll='scrolling'>
+    <view class="header">
+      <view id='search'>
+        <view class='address' catchtap='address'>
+          <image src='../../common/images/nav.png'></image>位置
+        </view>
+        <view class='search' catchtap='search'>
+          <input disabled='true' placeholder='请告诉我你的愿望'></input>
+        </view>
+      </view>
+      <swiper previous-margin='86rpx' autoplay='true' next-margin='86rpx' circular='true' duration='200' interval='3000' indicator-dots='true' indicator-active-color='#fff'>
+        <swiper-item wx:for='{{slideList}}' wx:key='item'>
+          <image mode='aspectFill' src='{{item.src}}'></image>
+        </swiper-item>
+      </swiper>
+    </view>
+    <view class='rank' style='position:{{scrollTop?"fixed":"relative"}}'>
+      <view class='{{currentRankIndex===index?"rank_item ac":"rank_item"}}' wx:for='{{rankList}}' wx:key='item' data-index='{{index}}' catchtap='tabsChange' wx:if='{{!productClass||scrollTop}}'>
+        {{item}}
+      </view>
+      <view class='rank_item' catchtap='allClass' wx:if='{{!productClass||scrollTop}}'>
+        筛选
+        <image src='./rank.png' style='transform:rotate({{productClass?180:0}}deg)'></image>
+      </view>
+      <view class='all_detail' wx:if='{{productClass}}' catchtouchmove='prevent'>
+        <view class='modal' catchtap='allClass' style='opacity:{{productClassAc?1:0}}' catchtouchmove='prevent'></view>
+        <view class='rank_list' style='transform:translateX({{productClassAc?0:"100%"}})' catchtouchmove='prevent'>
+          <view class='product_rank'>
+            <view class='{{currentRankChangeIndex===index?"rank_list_item ac":"rank_list_item"}}' wx:for='{{productClassList}}' wx:key='index'>
+              <view data-id='{{item}}' data-index='{{index}}' catchtap='productClassChange'>{{item}}</view>
+              <image wx:if='{{currentRankChangeIndex===index}}' src='./rankAc.png'></image>
+            </view>
+          </view>
+          <view class='city_list'>
+            <view class='select' catchtap='showState'>{{rankAddress.state}}
+              <image src='../../common/images/rank2.png' style='transform:rotate({{rankAddress.showState?0:180}}deg)'></image>
+            </view>
+            <scroll-view class='scroll_view' scroll-y wx:if='{{rankAddress.showState}}'>
+              <view wx:for='{{cityList}}' wx:key='index'>
+                <view data-index='{{index}}' data-item='{{item.state}}' catchtap='selectState'>{{item.state}}</view>
+              </view>
+            </scroll-view>
+            <view class='select' catchtap='showCity'>{{rankAddress.city}}
+              <image src='../../common/images/rank2.png' style='transform:rotate({{rankAddress.showCity?0:180}}deg)'></image>
+            </view>
+            <scroll-view class='scroll_view' scroll-y wx:if='{{rankAddress.showCity}}'>
+              <view wx:for='{{cityList[rankAddress.currentState].city}}' wx:key='index'>
+                <view data-index='{{index}}' data-item='{{item.city}}' catchtap='selectCity'>{{item.city}}</view>
+              </view>
+            </scroll-view>
+            <view class='select' catchtap='showSchool'>{{rankAddress.school}}
+              <image src='../../common/images/rank2.png' style='transform:rotate({{rankAddress.showSchool?0:180}}deg)'></image>
+            </view>
+            <scroll-view class='scroll_view' scroll-y wx:if='{{rankAddress.showSchool}}'>
+              <view wx:for='{{cityList[rankAddress.currentState].city[rankAddress.currentCity].school}}' wx:key='index'>
+                <view data-index='{{index}}' data-item='{{item.school}}' catchtap='selectSchool'>{{item.school}}</view>
+              </view>
+            </scroll-view>
+          </view>
+          <view class='btn'>
+            <view class='no' catchtap='allClass'>取消</view>
+            <view class='yes'>确定</view>
+          </view>
+        </view>
+      </view>
+      <view class='{{currentRankIndex===0?"active":"active ac"}}' wx:if='{{!productClass||scrollTop}}'></view>
+    </view>
+    <view class='rank' wx:if='{{!scrollTop&&productClass}}' style='position:fixed'>
+      <view class='{{currentRankIndex===index?"rank_item ac":"rank_item"}}' wx:for='{{rankList}}' wx:key='item' data-index='{{index}}' catchtap='tabsChange'>
+        {{item}}
+      </view>
+      <view class='rank_item' catchtap='allClass'>
+        筛选
+        <image src='./rank.png' style='transform:rotate({{productClass?180:0}}deg)'></image>
+      </view>
+      <view class='active' style='left:{{currentRankIndex*254+50}}rpx'></view>
+    </view>
+    <view class='list_wrapper' style='padding-top:{{scrollTop?"46":"0"}}px'>
+      <view class='list'>
+        <view wx:for='{{productList}}' wx:key='item' data-detail='{{item}}' bindtap='toDetail'>
+          <template is='productList' data='{{...item}}'></template>
+        </view>
+      </view>
+    </view>
+    <view class='more'>向上拉动刷新</view>
+  </scroll-view>
+</view>

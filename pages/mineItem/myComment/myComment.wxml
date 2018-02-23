@@ -1,0 +1,32 @@
+<view id='comment'>
+  <view class='tabs'>
+    <view class='{{commentAc==0?"tabs_item ac":"tabs_item"}}' data-index='0' catchtap='commentIndex'>回复我的</view>
+    <view class='{{commentAc==1?"tabs_item ac":"tabs_item"}}' data-index='1' catchtap='commentIndex'>我评论的</view>
+  </view>
+  <view class='comment_list clearfix' wx:if='{{commentAc==0}}'>
+    <view wx:for='{{commentList}}' wx:key='index' class='comment_item'>
+      <view class='user_wrapper'>
+        <view class='user' catchtap='toSeller'>
+          <image src='{{item.avatar}}'></image>
+          <text><text style='color: #425fb3;'>{{item.name}}</text> 评论了:</text>
+        </view>
+        <view class='user_talk'>{{item.talk}}</view>
+        <view class='talk_time'>{{item.talkTime}}</view>
+        <view class='from' catchtap='toDetail'>蓝牙音箱迷你文艺可爱九成新噢超漂亮的</view>
+      </view>
+    </view>
+  </view>
+  <view class='comment_list clearfix' wx:if='{{commentAc==1}}'>
+    <view wx:for='{{commentList}}' wx:key='index' class='comment_item'>
+      <view class='user_wrapper' catchtap='toUser'>
+        <view class='user'>
+          <image src='{{item.avatar}}'></image>
+          <text><text style='color: #425fb3;'>我的昵称</text> 评论了:</text>
+        </view>
+        <view class='user_talk'>{{item.talk}}</view>
+        <view class='talk_time'>{{item.talkTime}}</view>
+        <view class='from' catchtap='toDetail'>蓝牙音箱迷你文艺可爱九成新噢超漂亮的</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,122 @@
+<view id='productDetail'>
+  <view class='header'>
+    <view class='mode'></view>
+    <image mode='center' src='../../static/image/detail/detail1.jpg'></image>
+    <view class='user' catchtap='toSeller'>
+      <image src='../../static/image/detail/detail1.jpg'></image>
+      <view>用户名字</view>
+    </view>
+  </view>
+  <view class='content'>
+    <view class='title'>蓝牙音箱迷你文艺可爱九成新噢超漂亮的</view>
+    <view class='flow'>2456·浏览</view>
+    <view class='release_time'>发布于：2018.02.16</view>
+    <view class='price clearfix'>
+      <view class='now float_l'>$
+        <text style='font-size:56rpx;line-height: 0;'>1500</text>
+      </view>
+      <view class='old float_l'>$ 2300</view>
+      <view class='float_r' style='font-weight: bolder;color:#666'>9成新</view>
+    </view>
+    <view class='shelf_time' wx:if='{{differ>0}}'>
+      {{disDay}}天 {{disHour}}小时 {{disMin}}分 {{disSec}}秒后下架
+    </view>
+    <view class='position' catchtap='openPosition'>
+      <image class='float_l' src='../../common/images/nav2.png'></image>
+      <view class='float_l'>卖家定位限定显示字数为十七个汉字长</view>
+      <view class='float_r'>距您约2080km</view>
+    </view>
+    <view class='label'>
+      <view class='label_item ac'>秒杀</view>
+      <view class='label_item'>家具</view>
+      <view class='label_item'>文艺</view>
+    </view>
+    <view class='content_detail'>
+      事实上，南方人吃米、北方人吃面，早已经是过时的老印象了。现在物资丰富，人们想吃什么就吃什么，南方人和北方人的主食差异已经没有那么明显。 南北方人的身高差异不是简单的主食差异造成的，遗传基因是决定不同地区人群生理、性格特征的决定因素，地理因素、气候因素等都会影响人的体质、体型。当然，饮食因素也要考虑，但大米和白面只是饮食的一部分，不能用这一点解释南北身高差。 ⊙⊙大米、白面不是越白越好
+    </view>
+    <view class='pic'>
+      <image mode='widthFix' src='../../static/image/detail/detail1.jpg'></image>
+      <image mode='widthFix' src='../../static/image/detail/detail2.jpg'></image>
+      <image mode='widthFix' src='../../static/image/detail/detail3.jpg'></image>
+      <image mode='widthFix' src='../../static/image/detail/detail4.jpg'></image>
+    </view>
+  </view>
+  <view class='comment'>
+    <view class='title'>
+      <text>评论 (2536)</text>
+    </view>
+    <view class='comment_list clearfix'>
+      <view wx:for='{{commentList}}' wx:key='index' class='comment_item'>
+        <view class='user_wrapper'>
+          <view class='user' catchtap='toSeller'>
+            <image src='{{item.avatar}}'></image>
+            <text>{{item.name}}</text>
+          </view>
+          <view class='user_talk' data-index='{{index}}' catchtap='replyBuyer'>{{item.talk}}</view>
+          <view class='talk_time'>
+            {{item.talkTime}}
+            <image src='./warning.png' catchtap='toReport'></image>
+          </view>
+        </view>
+        <view class='user_wrapper ac' wx:for='{{item.callback}}' wx:key='index' wx:for-item='items'>
+          <view class='user'>
+            <image src='{{items.avatar}}'></image>
+            <text>{{items.name}}</text>
+          </view>
+          <view class='user_talk' data-index='{{index}}' catchtap='replyBuyer'>{{items.talk}}</view>
+          <view class='talk_time'>{{items.talkTime}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='operating' wx:if='{{!commentAc}}'>
+    <view class='operating_item' catchtap='collect'>
+      <image src='{{collectAc?"./heartAc.png":"./heart.png"}}'></image>收藏
+    </view>
+    <view class='operating_item' catchtap='share'>
+      <image src='./share.png'></image>分享
+    </view>
+    <view class='operating_item' catchtap='comment'>
+      <image src='./speech.png'></image>评论
+    </view>
+    <view class='operating_phone' catchtap='contactTo'>联系卖家</view>
+  </view>
+  <view class='speech_text' catchtouchmove='prevent' wx:if='{{commentAc}}' style='height:{{commentFocus?"860rpx":"270rpx"}}'>
+    <text>回复</text>
+    <textarea maxlength='100' bindconfirm='commentFinish' catchtouchmove='prevent' bindfocus='commentIn' bindblur='commentOut'></textarea>
+  </view>
+  <view class='speech_text' catchtouchmove='prevent' wx:if='{{sellerCommentAc}}' style='height:{{sellerCommentFocus?"860rpx":"270rpx"}}'>
+    <text>回复</text>
+    <textarea maxlength='100' bindconfirm='sellerCommentFinish' catchtouchmove='prevent' bindfocus='sellerCommentIn' bindblur='sellerCommentOut'></textarea>
+  </view>
+  <view class='phone_to' wx:if='{{contactAc}}'>
+    <view class='code'>
+      <view class='text' style='font-size: 24rpx'>扫一扫</view>
+      <image src='../../static/image/detail/detail1.jpg'></image>
+    </view>
+    <view class='text' style='font-size: 28rpx;padding-bottom: 40rpx;'>微信号:aaaa</view>
+    <view class='phone_number'>电话号码: 123456789</view>
+    <view class='btn'>
+      <view class='btn_item' catchtap='contactTo'>取消</view>
+      <view class='btn_item ac' catchtap='phoneTo'>确定</view>
+    </view>
+  </view>
+  <view class='share_to clear_fix' wx:if='{{shareAc}}'>
+    <view class='top'>
+      <view class='share_wrapper'>
+        <view class='share_item'>
+          <image src='../../common/images/friend.png'></image>
+        </view>
+        发送给朋友
+      </view>
+      <view class='share_wrapper'>
+        <view class='share_item'>
+          <image src='../../common/images/friends.png'></image>
+        </view>
+        分享到朋友圈
+      </view>
+    </view>
+    <view class='bot' catchtap='share'>取消</view>
+  </view>
+  <view class='model' catchtouchmove='prevent' catchtap='deletes' wx:if='{{commentAc||contactAc||shareAc||sellerCommentAc}}'></view>
+</view>

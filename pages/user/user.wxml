@@ -1,0 +1,40 @@
+<view id='user'>
+  <view class='user_item ac'>
+    <view class='title ac'>头像</view>
+    <image catchtap='changeAvatar' src='{{userAvatar}}'></image>
+  </view>
+  <view class='user_item'>
+    <view class='title'>用户名</view>
+    <input maxlength='10' value='{{userName}}' bindblur='userNameChange'></input>
+  </view>
+  <view class='user_item'>
+    <view class='title'>性别</view>
+    <view class='text' style='color:#333' catchtap='showSex'>{{userSex}}</view>
+  </view>
+  <view class='user_item'>
+    <view class='title'>所在地</view>
+    <view class='text' style='color:#333' catchtap='toPosition'>{{userAddress}}</view>
+  </view>
+  <view class='user_item'>
+    <view class='title'>邮箱</view>
+    <input value='{{userEmail}}' disabled></input>
+  </view>
+  <view class='user_item'>
+    <view class='title'>手机</view>
+    <input value='{{userPhone}}' bindblur='userPhoneChange'></input>
+  </view>
+  <view class='user_item'>
+    <view class='title'>密码管理
+      <text class='float_r' catchtap='toAlter'>修改</text>
+    </view>
+    <view class='title' style='color:#333'>*********</view>
+  </view>
+  <button catchtap='savaUser'>保存</button>
+  <view class='signOut'>退出登录或切换账号</view>
+  <view class='model' catchtap='showSex' wx:if='{{userSexAc}}'></view>
+  <view class='sex' wx:if='{{userSexAc}}' style='transform:translateY({{userSexActive?"0":"100%"}})'>
+    <view class='title'>选择性别 </view>
+    <view class='sex_item' data-sex='男' catchtap='changeSex'>男</view>
+    <view class='sex_item' data-sex='女' catchtap='changeSex'>女</view>
+  </view>
+</view>

@@ -1,0 +1,347 @@
+#from, page {
+  width: 100%;
+  background-color: #fff;
+  font-size: 28rpx;
+  min-height: 100%;
+}
+
+input {
+  color: #333 !important;
+  text-align: right;
+}
+
+input.ac {
+  text-align: left;
+}
+
+#from .error {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  background-color: #e64340;
+  color: #fff;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+}
+
+#from .message {
+  color: #ccc;
+  padding: 0 40rpx;
+  background-color: #fff;
+}
+
+#from .message .title {
+  height: 96rpx;
+  line-height: 96rpx;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+#from .message .title input {
+  height: 100%;
+  color: #333;
+}
+
+#from .message .description {
+  padding-top: 20rpx;
+  height: 360rpx;
+}
+
+#from .message .description textarea {
+  height: 100%;
+  color: #333;
+}
+
+#from .message .pic .images {
+  font-size: 0;
+  width: 156rpx;
+  height: 156rpx;
+  margin-right: 10rpx;
+  float: left;
+  position: relative;
+}
+
+#from .message .pic .first {
+  width: 100%;
+  height: 52rpx;
+  line-height: 52rpx;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  font-size: 24rpx;
+  color: #fff;
+  text-align: center;
+}
+
+#from .message .pic .images .delete {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  width: 40rpx;
+  height: 30rpx;
+  font-size: 0;
+}
+
+#from .message .pic .images .delete image {
+  width: 40rpx;
+  height: 30rpx;
+}
+
+#from .message .pic .images:nth-child(4n) {
+  margin-right: 0;
+}
+
+#from .message .pic .images >image {
+  width: 156rpx;
+  height: 156rpx;
+}
+
+#from .message .camera {
+  float: left;
+  font-size: 0;
+  width: 156rpx;
+  height: 156rpx;
+  background-color: #f2f2f2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#from .message .camera image {
+  width: 54rpx;
+  height: 56rpx;
+  margin: 0 auto;
+}
+
+#from .message .camera .text {
+  font-size: 20rpx;
+}
+
+#from .message .address {
+  height: 30rpx;
+  line-height: 30rpx;
+  font-size: 24rpx;
+  color: #333;
+  padding: 40rpx 0;
+}
+
+#from .message .address image {
+  width: 21rpx;
+  height: 28rpx;
+  float: left;
+  margin-right: 10rpx;
+}
+
+#from .content {
+  color: #333;
+  padding: 0 40rpx;
+  background-color: #fff;
+  border-top: 20rpx solid #f2f2f2;
+}
+
+#from .content .price {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  height: 96rpx;
+  line-height: 96rpx;
+}
+
+#from .content .price .now_price, #from .content .price .old_price {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+#from .content .price .now_price {
+  padding-right: 20rpx;
+}
+
+#from .content .price .title {
+  flex: 1;
+}
+
+#from .content .price input {
+  flex: 3;
+  height: 100%;
+}
+
+#from .content .select {
+  width: 100%;
+  height: 96rpx;
+  line-height: 96rpx;
+}
+
+#from .content .select .time {
+  height: 96rpx;
+  line-height: 96rpx;
+  font-size: 28rpx;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+#from .content .select .label {
+  float: right;
+  width: 525rpx;
+  font-size: 28rpx;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#from .content .select .label .label_item {
+  width: 90rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  font-size: 28rpx;
+  background-color: #f2f2f2;
+  color: #ccc;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+#from .content .select .label .label_item.ac {
+  background-color: #fff3c3;
+  color: #f9633e;
+}
+
+#from .content .select .time image {
+  width: 14rpx;
+  height: 7rpx;
+  margin: 44rpx 0 0 30rpx;
+}
+
+#from .content .select .title {
+  float: left;
+  width: 140rpx;
+}
+
+#from .content .select input {
+  height: 100%;
+  color: #333;
+  float: left;
+  width: 456rpx;
+}
+
+#from .content .select image {
+  width: 16rpx;
+  height: 28rpx;
+  margin-top: 30rpx;
+  float: right;
+}
+
+#from .content .select .wechat {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 6rpx;
+  vertical-align: middle;
+  float: right;
+}
+
+#from .content .select .button {
+  width: 181rpx;
+  height: 64rpx;
+  float: right;
+  margin-top: 16rpx;
+  background-color: #e6e6e6;
+  border-radius: 8rpx;
+  position: relative;
+  transition: all 0.3s;
+}
+
+#from .content .select .button .btn {
+  width: 89rpx;
+  height: 54rpx;
+  background-color: #fff;
+  border-radius: 8rpx;
+  position: absolute;
+  left: 0rpx;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  transition: all 0.3s;
+}
+
+#from button {
+  width: 670rpx;
+  margin: 0 auto 0;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #ffda44;
+  border-radius: 8rpx;
+  border: none !important;
+  font-size: 36rpx;
+}
+
+#from .modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+}
+
+#from .modal .mode {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+#from .modal .product_class, #from .modal .spike_class {
+  width: 100%;
+  position: absolute;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
+  transform: translateY(0);
+  transition: all 0.3s;
+}
+
+#from .modal .title {
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: #ffda44;
+  padding: 0 40rpx;
+}
+
+#from .modal .product_class .class_item {
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #fff;
+  padding: 0 40rpx;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+#from .modal .product_class .class_item:last-of-type {
+  border-bottom: none;
+}
+
+.picker_view {
+  width: 100%;
+  height: 320rpx;
+  color: #333;
+  background-color: #fff;
+  padding: 0 40rpx;
+}
+
+.mask {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #333;
+}
+
+.indicator {
+  height: 60rpx;
+}

@@ -1,0 +1,40 @@
+#about, page {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 100%;
+  background-color: #fafafa;
+}
+
+#about {
+  padding: 40rpx;
+  text-align: center;
+}
+
+#about image {
+  width: 168rpx;
+  height: 168rpx;
+  border-radius: 25rpx;
+}
+
+#about .content {
+  font-size: 26rpx;
+  line-height: 42rpx;
+  color: #4d4d4d;
+  text-align: left;
+  padding-bottom: 40rpx;
+}
+
+#about .protocol {
+  padding-bottom: 40rpx;
+  font-size: 28rpx;
+  color: #1a1a1a;
+  height: 28rpx;
+  line-height: 28rpx;
+  text-align: left;
+}
+
+#about .protocol image {
+  width: 16rpx;
+  height: 28rpx;
+  float: right;
+}

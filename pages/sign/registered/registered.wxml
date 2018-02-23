@@ -1,0 +1,38 @@
+<import src="../top/top.wxml" />
+
+<view id='registered'>
+  <template is='top' data='{{...topData}}'></template>
+  <view class='item' wx:if='{{currentIndex==0}}'>
+    <view class='input'>
+      <input type='text' bindinput='userEmail' placeholder='请输入您的邮箱号' placeholder-class='color:#ccc'></input>
+    </view>
+    <button catchtap='nextTo' style='background-color:{{email&&protocol?"#ffda44":"#e6e6e6"}}'>下一步</button>
+  </view>
+  <view class='item' wx:if='{{currentIndex==1}}'>
+    <view class='input'>
+      <input type='number' bindinput='userCode' placeholder='请输入邮箱中的验证码' placeholder-class='color:#ccc'></input>
+      <view class='{{getAgin?"agin ac":"agin"}}' catchtap='getAginBtn'>
+        重发
+        <text wx:if='{{!getAgin}}'>({{getAginTime}}s)</text>
+      </view>
+    </view>
+    <button catchtap='lastTo' style='background-color:{{code?"#ffda44":"#e6e6e6"}}'>下一步</button>
+  </view>
+  <view class='item' wx:if='{{currentIndex==2}}'>
+    <view class='input'>
+      <input name='email' type='text' password='{{passwordShow?false:true}}' bindinput='userPassword' placeholder='请输入密码' placeholder-class='color:#ccc'></input>
+      <image catchtap='showPassword' src='{{passwordShow?             "../../../common/images/passwordAc.png":"../../../common/images/password.png"}}'></image>
+    </view>
+    <view class='input'>
+      <input type='text' password='{{passwordShow?false:true}}' bindinput='userConfirmPassword' placeholder='请确认密码' bindblur='userConfirmPassword' placeholder-class='color:#ccc'></input>
+    </view>
+    <button catchtap='finish' style='background-color:{{passwordSame?"#ffda44":"#e6e6e6"}}'>完成</button>
+  </view>
+  <view class='text' wx:if='{{currentIndex==0}}'>
+    <view class='btn' catchtap='pact' style='border-color:{{protocol?"#ffda44":"#999"}}'>
+      <view class='dot' style='background-color:{{protocol?"#ffda44":"#fff"}}'></view>
+    </view>
+    <text catchtap='toProtocol'>我已经阅读并同意<text style='color:#ffda44'>《NewLA用户协议》</text></text>
+  </view>
+  <view class='error' wx:if='{{error}}'>{{errorText}}</view>
+</view>

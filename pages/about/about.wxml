@@ -1,0 +1,10 @@
+<view id='about'>
+  <image src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1517475520851&di=b91032d21a2e91c5c6681acd4ce90341&imgtype=0&src=http%3A%2F%2Fp2.gexing.com%2FG1%2FM00%2F57%2F4B%2FrBACE1PMprDC5YvRAAApLA8dkfg161.jpg'></image>
+  <view class='content'>NewLA是果你觉得你所上传的一组图标，有相似的风格或应用场景，你希望他们以成套的方式被其他小伙伴所看见，那么，你可以将这一组图标申请为一个图标库；对于图标库的审批，我们都会走人肉审核，这大大保障了图标库图标的质量基准。另外，如果某图标隶属于某图标库，小伙伴可以在图标详情浮层看到；对于图标库的审批，我们都会走人肉审核，这大大保障了图标库图标的质量基准。另外，如果某图标隶属于某图标库，小伙伴可以在图标详情浮层看到</view>
+  <view class='protocol' catchtap='toProtocol'>
+    软件许可使用协议
+    <image src='../../common/images/right.png'></image>
+  </view>
+  <view class='protocol'>给我们发邮件：1235648@shsauah.cn</view>
+  <view class='protocol' style='color:#b3b3b3'>有任何疑问都可以通过此邮箱联系到我们哦！</view>
+</view>

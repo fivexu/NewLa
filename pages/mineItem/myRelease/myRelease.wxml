@@ -1,0 +1,60 @@
+<view id='release'>
+  <scroll-view scroll-y='true' style='height:100%;' bindscrolltolower='scrolled'>
+    <view class='wrapper' wx:for='{{releaseList}}' wx:for-item='item' wx:key='index'>
+      <view class='productList' bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd' catchtap='toDetail' data-index='{{index}}' style='transform: translateX({{currentIndex===index?trans:0}}px);'>
+        <view class='pics'>
+          <view wx:for='{{item.img}}' wx:key='indexs' wx:for-item='items'>
+            <image src='{{items.src}}'></image>
+          </view>
+        </view>
+        <view class='title'>{{item.title}}
+          <view class='time'>{{item.time}}</view>
+        </view>
+        <view class='address clearfix'>
+          <view class='float_l'>
+            <view class='label ac'>秒杀</view>
+            <view class='label'>家具</view>
+            <view class='label'>可爱</view>
+            <view class='label'>已下架</view>
+          </view>
+          <view class='float_r'>
+            <view class='old'>
+              <image src='../../../common/images/talk.png'></image>
+              {{item.oldPrice}}
+            </view>
+            <view class='now'>
+              <image src='../../../common/images/watch.png'></image>
+              {{item.nowPrice}}
+            </view>
+          </view>
+        </view>
+        <view class='status' wx:if='{{item.failAc}}'>
+          <image src='../../../common/images/fail.png'></image>
+        </view>
+        <view class='status' wx:if='{{item.downAc}}'>
+          <image src='../../../common/images/down.png'></image>
+        </view>
+      </view>
+      <view class='delete_product' style='transform: translateX({{currentIndex===index?trans:0}}px);'>
+        <view class='shelf' catchtap='shelf'>下架</view>
+        <view class='delete' catchtap='deletes'>删除</view>
+      </view>
+    </view>
+    <view class='phone_to' wx:if='{{deleteAc}}' catchtouchmove='prevent'>
+      <view class='text'>删除后不可回复,确认删除?</view>
+      <view class='btn'>
+        <view class='btn_item' catchtap='deletes'>取消</view>
+        <view class='btn_item ac' catchtap='deleteTo'>确定</view>
+      </view>
+    </view>
+    <view class='phone_to' wx:if='{{shelfAc}}' catchtouchmove='prevent'>
+      <view class='text'>下架后不可回复,确认下架?</view>
+      <view class='btn'>
+        <view class='btn_item' catchtap='shelf'>取消</view>
+        <view class='btn_item ac' catchtap='shelfTo'>确定</view>
+      </view>
+    </view>
+    <view class='model' catchtap='modelHide' wx:if='{{shelfAc||deleteAc}}' catchtouchmove='prevent'></view>
+    <view class='refresh'>向上拉动刷新</view>
+  </scroll-view>
+</view>

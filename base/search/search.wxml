@@ -1,0 +1,13 @@
+<view id='search'>
+  <view class='header'>
+    <view class='search'>
+      <image src='./search.png'></image>
+      <input type='text' value='{{value}}' placeholder='搜索您感兴趣的商品' placeholder-style='color: #999' confirm-type='done' bindconfirm='searchTo'></input>
+    </view>
+  </view>
+  <view class='history'>
+    <view class='title' wx:if='{{historyList.length}}'>历史搜索</view>
+    <view class='histroy_list' wx:for='{{historyList}}' wx:key='item'>{{item}}</view>
+  </view>
+  <view catchtap='clearHistory' class='clear' wx:if='{{historyList.length}}'>清除搜索历史</view>
+</view>
