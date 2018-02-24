@@ -3,17 +3,21 @@ import { post } from '../../api/post.js'
 const app = getApp()
 Page({
   data: {
-    userInfo: {}
+    userInfo: {},
+    avatarUrl: '',
+    nickName: ''
   },
   _getUserInfo() {
     if (app.globalData.userInfo) {
       this.setData({
-        userInfo: app.globalData.userInfo
+        avatarUrl: app.globalData.userInfo.avatarUrl,
+        nickName: app.globalData.userInfo.nickName
       })
     } else if (this.data.canIUse) {
       app.userInfoReadyCallback = res => {
         this.setData({
-          userInfo: res.userInfo
+          avatarUrl: app.globalData.userInfo.avatarUrl,
+          nickName: app.globalData.userInfo.nickName
         })
       }
     } else {
@@ -22,11 +26,26 @@ Page({
           wx.getUserInfo({
             success: res => {
               this.setData({
-                userInfo: res.userInfo
+                avatarUrl: res.userInfo.avatarUrl,
+                nickName: res.userInfo.nickName
               })
+            },
+            fail: res => {
+              if (!wx.getStorageSync('userId')) {
+                wx.navigateTo({
+                  url: '../sign/login/login',
+                })
+              }
             }
           })
         }
+      })
+    }
+    console.log(wx.getStorageSync('userId'))
+    if (wx.getStorageSync('userId')) {
+      this.setData({
+        avatarUrl: wx.getStorageSync('avatarUrl'),
+        nickName: wx.getStorageSync('nickName')
       })
     }
     // 登录
@@ -49,9 +68,9 @@ Page({
                   'http://49.51.41.227/newlaAdmin/index.php/Login/weChatCheck',
                   { openId: openIdRes.data.openid },
                   (res) => {
-                    console.log(res.data)
                     if (res.data.code === 400) {
                       app.globalData.openId = openIdRes.data.openid
+                      wx.setStorageSync('openId', openIdRes.data.openid)
                       wx.navigateTo({
                         url: '../sign/bind/bind'
                       })
@@ -70,8 +89,10 @@ Page({
       }
     })
   },
-  onLoad: function () {
+  onShow: function () {
     this._getUserInfo()
+  },
+  onLoad: function () {
   },
   login() {
     wx.navigateTo({
@@ -99,14 +120,14 @@ Page({
     })
   },
   toUserInfo() {
-    if (JSON.stringify(this.data.userInfo) === "{}") {
+    if (JSON.stringify(this.data.userInfo) === "{}" && !wx.getStorageSync('userId')) {
       wx.navigateTo({
         url: '../sign/login/login'
       })
       return
     }
     wx.navigateTo({
-      url: '../user/user',
+      url: `../user/user?userId=${wx.getStorageSync('userId')}`
     })
   }
 })

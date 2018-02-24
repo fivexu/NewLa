@@ -2,16 +2,19 @@
   "pages": [
    
     "pages/mine/mine",
+   
     "pages/welcome/welcome",
     "pages/home/home",
     "pages/release/release",
     "pages/user/user",
     "pages/seller/seller",
+    
     "pages/about/about",
-   "pages/sign/bind/bind",
+    
     "pages/sign/getback/getback",
     "pages/sign/registered/registered",
     "pages/sign/login/login",
+    "pages/sign/bind/bind",
     "pages/sign/alter/alter",
     "pages/mineItem/myComment/myComment",
     "pages/mineItem/myCollect/myCollect",

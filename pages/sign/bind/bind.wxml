@@ -16,7 +16,7 @@
         <text wx:if='{{!getAgin}}'>({{getAginTime}}s)</text>
       </view>
     </view>
-    <button catchtap='lastTo' style='background-color:{{code?"#ffda44":"#e6e6e6"}}'>下一步</button>
+    <button catchtap='lastTo' style='background-color:{{code?"#ffda44":"#e6e6e6"}}'>{{finished?'完成':'下一步'}}</button>
   </view>
   <view class='item' wx:if='{{currentIndex==2}}'>
     <view class='input'>

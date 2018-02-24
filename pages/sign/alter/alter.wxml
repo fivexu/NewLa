@@ -3,7 +3,7 @@
 <view id='alter'>
   <template is='top' data='{{...topData}}'></template>
   <view class='item' wx:if='{{currentIndex===0}}'>
-    <input bindinput='inputIn' placeholder='请输入旧密码' placeholder-class='color:#ccc'></input>
+    <input bindinput='inputIn' type='password' placeholder='请输入旧密码' placeholder-class='color:#ccc'></input>
     <button disabled='{{!oldPassword}}' style='background-color: {{oldPassword?"#ffda44":"#e6e6e6"}};' catchtap='nextTo'>下一步</button>
   </view>
   <view class='item' wx:if='{{currentIndex==1}}'>

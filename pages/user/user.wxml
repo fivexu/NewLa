@@ -9,11 +9,11 @@
   </view>
   <view class='user_item'>
     <view class='title'>性别</view>
-    <view class='text' style='color:#333' catchtap='showSex'>{{userSex}}</view>
+    <view class='text' style='color:#333' catchtap='showSex'>{{userSex===null?'男':userSex}}</view>
   </view>
   <view class='user_item'>
     <view class='title'>所在地</view>
-    <view class='text' style='color:#333' catchtap='toPosition'>{{userAddress}}</view>
+    <view class='text' style='color:#333' catchtap='toPosition'>{{userAddress==null?'填写您的位置':userAddress}}</view>
   </view>
   <view class='user_item'>
     <view class='title'>邮箱</view>

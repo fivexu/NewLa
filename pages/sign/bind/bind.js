@@ -1,4 +1,4 @@
-import { post } from '../../../api/post.js'
+import { post, postBindVerify, postBindRegister } from '../../../api/post.js'
 const app = getApp()
 
 Page({
@@ -11,7 +11,7 @@ Page({
     },
     passwordShow: false,
     getAgin: false,
-    getAginTime: 10,
+    getAginTime: 60,
     error: false,
     errorText: '',
     email: false,
@@ -44,7 +44,7 @@ Page({
   timeoutAgin() {
     this.setData({
       getAgin: false,
-      getAginTime: 10
+      getAginTime: 60
     })
     let timer = null
     clearInterval(timer)
@@ -80,31 +80,32 @@ Page({
       wx.showLoading({
         title: '发送邮件中',
       })
-      post(
-        'http://49.51.41.227/newlaAdmin/index.php/Login/send_verify',
-        { email: this.data.emailText },
+      postBindVerify({ email: this.data.emailText },
         (res) => {
-          console.log(res.data)
+          wx.hideLoading()
           if (res.data.code === 405 || res.data.code === 200) {
-            wx.hideLoading()
             this.setData({
               currentIndex: 1,
               'topData.currentIndex': 1,
               verify: res.data.verify,
               finished: res.data.code === 405 ? true : false
             })
-          }
-          if (res.data.code === 401) {
+            this.timeoutAgin()
+          } else if (res.data.code === 401) {
             this.setData({
-              email: true,
-              emailText: '该邮箱已被绑定,请更换邮箱'
+              error: true,
+              errorText: '该邮箱已被绑定,请更换邮箱'
+            })
+            this.timeoutError()
+          } else {
+            this.setData({
+              error: true,
+              errorText: '绑定失败,请稍后再试'
             })
             this.timeoutError()
           }
         }
       )
-      return
-
     }
     this.timeoutError()
   },
@@ -115,18 +116,26 @@ Page({
     wx.showLoading({
       title: '发送邮件中',
     })
-    post(
-      'http://192.168.0.104/newlaAdmin/index.php/Login/send_verify',
-      { email: this.data.emailText },
+    postBindVerify({ email: this.data.emailText },
       (res) => {
-        console.log(res.data.verify)
+        console.log(res.data)
         wx.hideLoading()
-        this.setData({
-          verify: res.data.verify
-        })
-        this.timeoutAgin()
-      })
-    this.timeoutAgin()
+        if (res.data.code === 405 || res.data.code === 200) {
+          this.setData({
+            verify: res.data.verify,
+            finished: res.data.code === 405 ? true : false
+          })
+        } else {
+          this.setData({
+            currentIndex: 0,
+            'topData.currentIndex': 0,
+            error: true,
+            errorText: '发送失败,请稍后重试'
+          })
+          this.timeoutError()
+        }
+      }
+    )
   },
   userCode(ev) {
     let val = ev.detail.value
@@ -150,11 +159,10 @@ Page({
       })
     } else {
       if (this.data.finished) {
-        post('http://49.51.41.227/newlaAdmin/index.php/Login/bind',
-          {
-            email: this.data.emailText,
-            openId: app.globalData.openId
-          },
+        postBind({
+          email: this.data.emailText,
+          openId: app.globalData.openId
+        },
           (res) => {
             console.log(res)
           })
@@ -217,9 +225,7 @@ Page({
       wx.showLoading({
         title: '验证中',
       })
-      post(
-        'http://49.51.41.227/newlaAdmin/index.php/Login/register',
-        {
+      postBindRegister({
           email: this.data.emailText,
           password: this.data.passwordText,
           confirmPassword: this.data.confirmPasswordText,

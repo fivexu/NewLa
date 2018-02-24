@@ -1,16 +1,17 @@
 <view id='login'>
   <form>
     <view class='username'>
-      <input name='username' type='text' placeholder='账号' placeholder-style='color:#ccc'></input>
+      <input name='username' bindinput='userEmail' type='text' placeholder='邮箱' placeholder-style='color:#ccc'></input>
     </view>
     <view class='password'>
-      <input name='password' focus='{{passwordShow?false:true}}' type='text' password='{{passwordShow?false:true}}' placeholder='密码' placeholder-style='color:#ccc'></input>
+      <input name='password' focus='{{passwordShow?false:true}}' type='text' password='{{passwordShow?false:true}}' bindinput='userPassword' placeholder='密码' placeholder-style='color:#ccc'></input>
       <image catchtap='showPassword' src='{{passwordShow?             "../../../common/images/passwordAc.png":"../../../common/images/password.png"}}'></image>
     </view>
-    <button class='sign_in'>登录</button>
+    <button class='sign_in' catchtap='login'>登录</button>
   </form>
   <view class='other'>
     <text catchtap='registered'>注册账号</text>
     <text catchtap='getBack'>忘记密码?</text>
   </view>
+  <view class='error' wx:if='{{error}}'>{{errorText}}</view>
 </view>

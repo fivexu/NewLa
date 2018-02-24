@@ -1,3 +1,5 @@
+import { post } from '../../../api/post.js'
+
 Page({
   data: {
     topData: {
@@ -12,11 +14,15 @@ Page({
     error: false,
     errorText: '',
     email: false,
+    emailText: false,
+    verify: '',
     code: false,
+    codeTrue: true,
     passwordSame: false,
     passwordText: '',
     password: false,
     confirmPassword: false,
+    confirmPasswordText: '',
     currentIndex: 0
   },
   userEmail(ev) {
@@ -24,11 +30,13 @@ Page({
     let rel = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
     if (rel.test(val)) {
       this.setData({
-        email: true
+        email: true,
+        emailText: val
       })
     } else {
       this.setData({
-        email: false
+        email: false,
+        emailText: ''
       })
     }
   },
@@ -65,14 +73,38 @@ Page({
     if (!this.data.email) {
       this.setData({
         error: true,
-        errorText: '该邮箱未激活或注册'
+        errorText: '请填写正确邮箱格式'
       })
     } else {
-      this.setData({
-        currentIndex: 1,
-        'topData.currentIndex': 1
+      wx.showLoading({
+        title: '发送邮件中'
       })
-      this.timeoutAgin()
+      post(
+        'http://192.168.0.104/Newlaadmin/index.php/login/backPwd',
+        { email: this.data.emailText },
+        (res) => {
+          wx.hideLoading()
+          if (res.data.code === 200) {
+            this.setData({
+              currentIndex: 1,
+              'topData.currentIndex': 1,
+              verify: res.data.verify
+            })
+            this.timeoutAgin()
+          } else if (res.data.code === 404) {
+            this.setData({
+              error: true,
+              errorText: '该邮箱未注册,请注册或重填邮箱'
+            })
+            this.timeoutError()
+          } else {
+            this.setData({
+              error: true,
+              errorText: '发送失败,服务器崩溃,请稍后重试'
+            })
+            this.timeoutError()
+          }
+        })
     }
     this.timeoutError()
   },
@@ -80,11 +112,27 @@ Page({
     if (!this.data.getAgin) {
       return
     }
+    wx.showLoading({
+      title: '发送邮件中'
+    })
+    post(
+      'http://192.168.0.104/Newlaadmin/index.php/login/backPwd',
+      { email: this.data.emailText },
+      (res) => {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          wx.hideLoading()
+          this.setData({
+            verify: res.data.verify
+          })
+          this.timeoutAgin()
+        }
+      })
     this.timeoutAgin()
   },
   userCode(ev) {
     let val = ev.detail.value
-    if (parseInt(val) === 8888) {
+    if (val.length === 4) {
       this.setData({
         code: true
       })
@@ -93,9 +141,18 @@ Page({
         code: false
       })
     }
+    if (parseInt(val) === this.data.verify) {
+      this.setData({
+        codeTrue: true
+      })
+    } else {
+      this.setData({
+        codeTrue: false
+      })
+    }
   },
   lastTo() {
-    if (!this.data.code) {
+    if (!this.data.codeTrue) {
       this.setData({
         error: true,
         errorText: '请填写正确的验证码'
@@ -128,7 +185,8 @@ Page({
     if (this.data.passwordText === val && this.data.passwordText.length === val.length) {
       this.setData({
         confirmPassword: true,
-        passwordSame: true
+        passwordSame: true,
+        confirmPasswordText: val
       })
     } else {
       this.setData({
@@ -154,9 +212,41 @@ Page({
         errorText: '密码不一致，请再次确认'
       })
     } else {
-      wx.switchTab({
-        url: '../../mine/mine',
+      wx.showLoading({
+        title: '修改中'
       })
+      post('http://192.168.0.104/Newlaadmin/index.php/login/savePwd',
+        {
+          email: this.data.emailText,
+          password: this.data.passwordText,
+          confirmPassword: this.data.confirmPasswordText
+        },
+        (res) => {
+          wx.hideLoading()
+          console.log(res.data)
+          if (res.data.code === 200) {
+            wx.showToast({
+              title: '修改成功',
+              icon: 'success',
+              duration: 1000
+            })
+            wx.switchTab({
+              url: '../../mine/mine',
+            })
+          } else if (res.data.code === 205) {
+            this.setData({
+              error: true,
+              errorText: '修改失败,两次密码不同,请重新输入'
+            })
+            this.timeoutError()
+          } else {
+            this.setData({
+              error: true,
+              errorText: '修改失败,请稍后再试'
+            })
+            this.timeoutError()
+          }
+        })
     }
     this.timeoutError()
   }

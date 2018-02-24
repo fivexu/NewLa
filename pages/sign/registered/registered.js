@@ -109,11 +109,16 @@ Page({
               'topData.currentIndex': 1,
               verify: data.verify
             })
-          }
-          if (data.code == 405) {
+          } else if (data.code == 405 || data.code == 401) {
             _this.setData({
               error: true,
               errorText: '该用户已存在,请直接登录或重新注册'
+            })
+            _this.timeoutError()
+          } else {
+            _this.setData({
+              error: true,
+              errorText: '注册失败,请稍后重试'
             })
             _this.timeoutError()
           }
@@ -135,7 +140,7 @@ Page({
       title: '正在重新发送邮件'
     })
     wx.request({
-      url: 'http://192.168.0.104/newlaAdmin/index.php/login/send_verify',
+      url: 'http://49.51.41.227/newlaAdmin/index.php/login/send_verify',
       method: 'POST',
       header: { 'content-type': 'application/x-www-form-urlencoded' },
       data: {

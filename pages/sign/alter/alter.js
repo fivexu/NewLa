@@ -1,3 +1,5 @@
+import { postLogin, postAlter } from '../../../api/post.js'
+
 Page({
   data: {
     topData: {
@@ -14,6 +16,7 @@ Page({
     passwordText: '',
     password: false,
     confirmPassword: false,
+    confirmPasswordText: '',
     passwordShow: false,
   },
   inputIn(ev) {
@@ -35,23 +38,31 @@ Page({
     }, 3000)
   },
   nextTo() {
-    if (this.data.oldPasswordText !== '123456') {
-      this.setData({
-        errorText: '密码错误,请重试',
-        error: true
+    console.log(wx.getStorageSync('email'), this.data.oldPasswordText)
+    postLogin({
+      email: wx.getStorageSync('email'),
+      password: this.data.oldPasswordText
+    },
+      (res) => {
+        console.log(res)
+        if (res.data.code === 200) {
+          this.setData({
+            currentIndex: 1,
+            'topData.currentIndex': 1
+          })
+        } else {
+          this.setData({
+            errorText: '密码错误,请重试',
+            error: true
+          })
+          setTimeout(() => {
+            this.setData({
+              error: false,
+              errorText: ''
+            })
+          }, 3000)
+        }
       })
-      setTimeout(() => {
-        this.setData({
-          error: false,
-          errorText: ''
-        })
-      }, 3000)
-    } else {
-      this.setData({
-        currentIndex: 1,
-        'topData.currentIndex': 1
-      })
-    }
   },
   userPassword(ev) {
     let val = ev.detail.value
@@ -70,10 +81,12 @@ Page({
   },
   userConfirmPassword(ev) {
     let val = ev.detail.value
+    console.log(val)
     if (this.data.passwordText === val && this.data.passwordText.length === val.length) {
       this.setData({
         confirmPassword: true,
-        passwordSame: true
+        passwordSame: true,
+        confirmPasswordText: val
       })
     } else {
       this.setData({
@@ -99,9 +112,33 @@ Page({
         errorText: '密码不一致，请再次确认'
       })
     } else {
-      wx.redirectTo({
-        url: '../../user/user',
+      wx.showLoading({
+        title: '修改中',
       })
+      postAlter({
+        email: wx.getStorageSync('email'),
+        password: this.data.oldPasswordText,
+        confirmPassword: this.data.confirmPasswordText
+      },
+        (res) => {
+          wx.hideLoading()
+          console.log(res)
+          if (res.data.code === 200) {
+            wx.redirectTo({
+              url: '../../user/user',
+            })
+          } else if (res.data.code === 401) {
+            this.setData({
+              error: true,
+              errorText: '密码不一致，请再次确认'
+            })
+          } else {
+            this.setData({
+              error: true,
+              errorText: '服务器繁忙,请稍后重试'
+            })
+          }
+        })
     }
     this.timeoutError()
   }
