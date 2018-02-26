@@ -1,5 +1,6 @@
 let dataList = require('../../static/data/data.js')
 import { timeObj, getDays, getHours, oponCamare, GetDate } from '../../common/js/public.js'
+import { postRelease, releaseUrl } from '../../api/post.js'
 
 // 下架默认加一天
 let addOneDate = new Date()
@@ -41,12 +42,25 @@ Page({
     value: [0, 0, 0, 0]
   },
   onShow: function () {
-    if (!wx.getStorageSync('address')) {
-      return
+    if (!wx.getStorageSync('userId')) {
+      wx.showModal({
+        title: '注意',
+        content: '您还未邮箱登录,现在登录?',
+        success: function (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../sign/login/login'
+            })
+          } else if (res.cancel) {
+          }
+        }
+      })
     }
-    this.setData({
-      address: wx.getStorageSync('address').school
-    })
+    if (wx.getStorageSync('address')) {
+      this.setData({
+        address: wx.getStorageSync('address').school
+      })
+    }
   },
   bindChange: function (e) {
     const val = e.detail.value
@@ -181,10 +195,6 @@ Page({
       this.setData({
         errorText: '请输入联系电话'
       })
-    } else if (this.data.currentLabel === 'other' && otherval.label.length !== 2) {
-      this.setData({
-        errorText: '自定义标签必须是两个字'
-      })
     } else {
       wx.showLoading({
         title: '正在提交',
@@ -203,46 +213,44 @@ Page({
   fromContent(val) {
     let spikeTime = `${this.data.year}-${this.data.month}-${this.data.day} ${this.data.hour}`
     spikeTime = this.data.spikeShow ? spikeTime : ''
+    let labelText = this.data.label
     let imgSrc = this.data.imageSrc
     let _this = this
     let n = 0
     for (let i = 0; i < imgSrc.length; i++) {
       wx.uploadFile({
-        url: 'http://49.51.41.227/newlaAdmin/index.php/goods/uploadGoodsImg',
+        url: releaseUrl,
         filePath: imgSrc[i],
         header: {
           "Content-Type": "multipart/form-data"
         },
         name: 'images',
         formData: {
-          'id': 7
+          'id': wx.getStorageSync('userId')
         },
         success: function (res) {
           n++
         }
       })
     }
-    wx.request({
-      url: 'http://49.51.41.227/newlaAdmin/index.php/goods/uploadGoods',
-      method: 'POST',
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
-      data: {
-        userId: 7,
-        title: val.title,
-        content: val.description,
-        address: _this.data.address,
-        newPrice: val.nowPrice,
-        oldPrice: val.oldPrice,
-        types: _this.data.productText,
-        spikeTime: spikeTime,
-        status: val.status,
-        phone: val.phone,
-        wechat: val.wechat,
-        label: val.label !== '' ? val.label : _this.data.label,
-      },
-      success: function (res) {
-        console.log(val)
-        console.log(res.data)
+    if (val.label !== '' && this.data.currentLabel === 'other') {
+      labelText = val.label
+    }
+    postRelease({
+      userId: wx.getStorageSync('userId'),
+      title: val.title,
+      content: val.description,
+      address: _this.data.address,
+      newPrice: val.nowPrice,
+      oldPrice: val.oldPrice,
+      types: _this.data.productText,
+      spikeTime: spikeTime,
+      status: val.status,
+      phone: val.phone,
+      wechat: val.wechat,
+      label: labelText
+    },
+      (res) => {
         wx.hideLoading()
         wx.showToast({
           title: '发布成功',
@@ -281,8 +289,7 @@ Page({
           hour: timeObj.date.getHours() + 1 < 9 ? `0${timeObj.date.getHours() + 1}:00` : `${timeObj.date.getHours() + 1}:00`,
           value: [0, 0, 0, 0]
         })
-      }
-    })
+      })
   },
   formSubmit(ev) {
     let val = ev.detail.value

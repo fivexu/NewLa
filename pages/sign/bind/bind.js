@@ -1,4 +1,4 @@
-import { post, postBindVerify, postBindRegister } from '../../../api/post.js'
+import { postBind, postBindVerify, postBindRegister } from '../../../api/post.js'
 const app = getApp()
 
 Page({
@@ -83,6 +83,7 @@ Page({
       postBindVerify({ email: this.data.emailText },
         (res) => {
           wx.hideLoading()
+          console.log(res.data)
           if (res.data.code === 405 || res.data.code === 200) {
             this.setData({
               currentIndex: 1,
@@ -159,12 +160,34 @@ Page({
       })
     } else {
       if (this.data.finished) {
+        wx.showLoading({
+          title: '正在绑定中',
+        })
         postBind({
           email: this.data.emailText,
-          openId: app.globalData.openId
+          openId: wx.getStorageSync('openId')
         },
           (res) => {
-            console.log(res)
+            wx.hideLoading()
+            if (res.data.code === 200) {
+              let nickName = res.data.data.username === null ? app.globalData.userInfo.nickName : res.data.data.username
+              let avatar = res.data.data.avatar === null ? app.globalData.userInfo.avatarUrl : res.data.data.avatar
+              wx.setStorageSync('userId', res.data.data.id)
+              wx.setStorageSync('nickName', nickName)
+              wx.setStorageSync('avatarUrl', avatar)
+              wx.setStorageSync('email', res.data.data.email)
+              wx.switchTab({
+                url: '../../mine/mine',
+              })
+            } else {
+              this.setData({
+                error: true,
+                errorText: '绑定失败请稍后重试'
+              })
+              wx.switchTab({
+                url: '../../mine/mine',
+              })
+            }
           })
       } else {
         this.setData({
@@ -225,12 +248,13 @@ Page({
       wx.showLoading({
         title: '验证中',
       })
+      console.log(wx.getStorageSync('openId'))
       postBindRegister({
-          email: this.data.emailText,
-          password: this.data.passwordText,
-          confirmPassword: this.data.confirmPasswordText,
-          openId: app.globalData.openId
-        },
+        email: this.data.emailText,
+        password: this.data.passwordText,
+        confirmPassword: this.data.confirmPasswordText,
+        openId: wx.getStorageSync('openId')
+      },
         (res) => {
           wx.hideLoading()
           console.log(res)

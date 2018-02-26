@@ -30,7 +30,7 @@
     <view class='title' style='color:#333'>*********</view>
   </view>
   <button catchtap='savaUser'>保存</button>
-  <view class='signOut'>退出登录或切换账号</view>
+  <view class='signOut' catchtap='signOut'>退出登录或切换账号</view>
   <view class='model' catchtap='showSex' wx:if='{{userSexAc}}'></view>
   <view class='sex' wx:if='{{userSexAc}}' style='transform:translateY({{userSexActive?"0":"100%"}})'>
     <view class='title'>选择性别 </view>

@@ -1,5 +1,5 @@
 import { oponCamare } from '../../common/js/public.js'
-import { postUserGet, postUser } from '../../api/post.js'
+import { postUserGet, postUser, userUrl } from '../../api/post.js'
 const app = getApp()
 
 Page({
@@ -15,7 +15,6 @@ Page({
     userSexActive: false
   },
   getInfo() {
-    let _this = this
     postUserGet({
       id: wx.getStorageSync('userId')
     },
@@ -23,7 +22,7 @@ Page({
         let data = res.data.data
         wx.hideLoading()
         if (res.data.code === 200) {
-          _this.setData({
+          this.setData({
             userAvatar: data.avatar,
             userName: data.username,
             userSex: data.sex,
@@ -80,7 +79,7 @@ Page({
           title: '保存中...'
         })
         wx.uploadFile({
-          url: 'http://192.168.0.104/newlaAdmin/index.php/login/change',
+          url: userUrl,
           filePath: res.tempFilePaths[0],
           header: {
             "Content-Type": "multipart/form-data"
@@ -91,7 +90,7 @@ Page({
           },
           success: function (res) {
             wx.hideLoading()
-            data = JSON.parse(res.data)
+            let data = typeof res.data == 'string' ? JSON.parse(res.data) : res.data
             if (data.code === 200) {
               wx.setStorageSync('avatarUrl', data.avatar)
             }
@@ -155,5 +154,12 @@ Page({
         _this.getInfo()
       }
     )
+  },
+  signOut() {
+    wx.clearStorageSync()
+    wx.setStorageSync('singOut', true)
+    wx.switchTab({
+      url: '../mine/mine',
+    })
   }
 })

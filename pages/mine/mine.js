@@ -1,73 +1,51 @@
-import { post } from '../../api/post.js'
+import { postMineWechatLogin } from '../../api/post.js'
 
 const app = getApp()
 Page({
   data: {
     userInfo: {},
-    avatarUrl: '',
-    nickName: ''
+    avatarUrl: null,
+    nickName: '',
+    binged: false
   },
-  _getUserInfo() {
-    if (app.globalData.userInfo) {
+  loginInfo() {
+    if (wx.getStorageSync('singOut')) {
       this.setData({
-        avatarUrl: app.globalData.userInfo.avatarUrl,
-        nickName: app.globalData.userInfo.nickName
+        avatarUrl: null,
+        nickName: '',
       })
-    } else if (this.data.canIUse) {
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          avatarUrl: app.globalData.userInfo.avatarUrl,
-          nickName: app.globalData.userInfo.nickName
-        })
-      }
-    } else {
-      wx.getSetting({
-        success: res => {
-          wx.getUserInfo({
-            success: res => {
-              this.setData({
-                avatarUrl: res.userInfo.avatarUrl,
-                nickName: res.userInfo.nickName
-              })
-            },
-            fail: res => {
-              if (!wx.getStorageSync('userId')) {
-                wx.navigateTo({
-                  url: '../sign/login/login',
-                })
-              }
-            }
-          })
-        }
-      })
+      return
     }
-    console.log(wx.getStorageSync('userId'))
-    if (wx.getStorageSync('userId')) {
-      this.setData({
-        avatarUrl: wx.getStorageSync('avatarUrl'),
-        nickName: wx.getStorageSync('nickName')
-      })
-    }
-    // 登录
+    let _this = this
     wx.login({
-      success: function (res) {
-        if (res.code) {
+      success: function (loginRes) {
+        if (loginRes.code) {
           wx.request({
             url: 'https://api.weixin.qq.com/sns/jscode2session',
             data: {
               appid: 'wxdf1f834c6efccc8e',
               secret: '8f1d8230a71509055e47d2dae4e41d91',
               grant_type: 'authorization_code',
-              js_code: res.code
+              js_code: loginRes.code
             },
             method: 'GET',
             header: { 'content-type': 'application/json' },
             success: function (openIdRes) {
               if (openIdRes.data.openid != null & openIdRes.data.openid != undefined) {
-                post(
-                  'http://49.51.41.227/newlaAdmin/index.php/Login/weChatCheck',
-                  { openId: openIdRes.data.openid },
+                postMineWechatLogin({ openId: openIdRes.data.openid },
                   (res) => {
+                    if (res.data.code === 200) {
+                      let nickName = res.data.data.username === null ? app.globalData.userInfo.nickName : res.data.data.username
+                      let avatar = res.data.data.avatar === null ? app.globalData.userInfo.avatarUrl : res.data.data.avatar
+                      wx.setStorageSync('userId', res.data.data.id)
+                      wx.setStorageSync('nickName', nickName)
+                      wx.setStorageSync('avatarUrl', avatar)
+                      wx.setStorageSync('email', res.data.data.email)
+                      _this.setData({
+                        avatarUrl: avatar,
+                        nickName: nickName
+                      })
+                    }
                     if (res.data.code === 400) {
                       app.globalData.openId = openIdRes.data.openid
                       wx.setStorageSync('openId', openIdRes.data.openid)
@@ -89,8 +67,43 @@ Page({
       }
     })
   },
+  _getInfo() {
+    wx.getSetting({
+      success: res => {
+        wx.getUserInfo({
+          success: res => {
+            this.setData({
+              avatarUrl: res.userInfo.avatarUrl,
+              nickName: res.userInfo.nickName
+            })
+            this.loginInfo()
+          },
+          fail: res => {
+            if (this.data.binged) {
+              return
+            }
+            if (!wx.getStorageSync('userId')) {
+              this.setData({
+                binged: true
+              })
+              wx.navigateTo({
+                url: '../sign/login/login',
+              })
+            }
+          }
+        })
+      }
+    })
+  },
   onShow: function () {
-    this._getUserInfo()
+    if (wx.getStorageSync('nickName')) {
+      this.setData({
+        avatarUrl: wx.getStorageSync('avatarUrl'),
+        nickName: wx.getStorageSync('nickName')
+      })
+    } else {
+      this._getInfo()
+    }
   },
   onLoad: function () {
   },
@@ -120,7 +133,7 @@ Page({
     })
   },
   toUserInfo() {
-    if (JSON.stringify(this.data.userInfo) === "{}" && !wx.getStorageSync('userId')) {
+    if (JSON.stringify(this.data.userInfo) == "{}" && this.data.nickName === '') {
       wx.navigateTo({
         url: '../sign/login/login'
       })

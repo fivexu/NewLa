@@ -39,6 +39,7 @@ Page({
             icon: 'success',
             duration: 1000
           })
+          wx.clearStorageSync()
           wx.setStorageSync('userId', res.data.data.userId)
           wx.setStorageSync('nickName', res.data.data.userName)
           wx.setStorageSync('avatarUrl', res.data.data.avatar)

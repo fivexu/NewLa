@@ -1,7 +1,7 @@
 <view id='mine'>
   <view class='user'>
     <view class='avatar' catchtap='toUserInfo'>
-      <image src='{{avatarUrl!==null?avatarUrl:"./contact.png"}}'></image>
+      <image src='{{avatarUrl!==null||""?avatarUrl:"./contact.png"}}'></image>
     </view>
     <view class='sign' catchtap='login' wx:if='{{!nickName}}'>
       <text>登录/注册</text>
