@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/release/release",
     "pages/welcome/welcome",
     "pages/home/home",
-    "pages/release/release",
     "pages/mine/mine",
     "pages/user/user",
     "pages/seller/seller",

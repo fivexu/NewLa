@@ -38,13 +38,11 @@ Page({
     }, 3000)
   },
   nextTo() {
-    console.log(wx.getStorageSync('email'), this.data.oldPasswordText)
     postLogin({
       email: wx.getStorageSync('email'),
       password: this.data.oldPasswordText
     },
       (res) => {
-        console.log(res)
         if (res.data.code === 200) {
           this.setData({
             currentIndex: 1,
@@ -81,7 +79,6 @@ Page({
   },
   userConfirmPassword(ev) {
     let val = ev.detail.value
-    console.log(val)
     if (this.data.passwordText === val && this.data.passwordText.length === val.length) {
       this.setData({
         confirmPassword: true,
@@ -117,12 +114,12 @@ Page({
       })
       postAlter({
         email: wx.getStorageSync('email'),
-        password: this.data.oldPasswordText,
+        password: this.data.passwordText,
         confirmPassword: this.data.confirmPasswordText
       },
         (res) => {
+          console.log(this.data.passwordText, this.data.confirmPasswordText)
           wx.hideLoading()
-          console.log(res)
           if (res.data.code === 200) {
             wx.redirectTo({
               url: '../../user/user',

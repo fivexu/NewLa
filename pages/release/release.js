@@ -217,22 +217,6 @@ Page({
     let imgSrc = this.data.imageSrc
     let _this = this
     let n = 0
-    for (let i = 0; i < imgSrc.length; i++) {
-      wx.uploadFile({
-        url: releaseUrl,
-        filePath: imgSrc[i],
-        header: {
-          "Content-Type": "multipart/form-data"
-        },
-        name: 'images',
-        formData: {
-          'id': wx.getStorageSync('userId')
-        },
-        success: function (res) {
-          n++
-        }
-      })
-    }
     if (val.label !== '' && this.data.currentLabel === 'other') {
       labelText = val.label
     }
@@ -250,45 +234,64 @@ Page({
       wechat: val.wechat,
       label: labelText
     },
-      (res) => {
-        wx.hideLoading()
-        wx.showToast({
-          title: '发布成功',
-          icon: 'success',
-          duration: 1000
-        })
-        _this.setData({
-          errorText: '',
-          imageSrc: [],
-          currentLabel: 0,
-          wechatAc: false,
-          modalShow: false,
-          spikeShow: false,
-          spikeShowTime: false,
-          spikeShowAc: false,
-          productShow: false,
-          productShowAc: false,
-          productClass: [],
-          titleVal: '',
-          descriptionVal: '',
-          nowPriceVal: '',
-          oldPriceVal: '',
-          statusVal: '',
-          wechatVal: '',
-          phoneVal: '',
-          statusNumber: false,
-          address: '请选择您的位置',
-          productText: '商品种类',
-          years: timeObj.years,
-          months: timeObj.months,
-          days: timeObj.days,
-          hours: timeObj.hours,
-          year: addOneDate2.getFullYear(),
-          month: (addOneDate2.getMonth() + 1) < 9 ? `0${addOneDate2.getMonth() + 1}` : (addOneDate2.getMonth() + 1),
-          day: addOneDate2.getDate() < 9 ? `0${addOneDate2.getDate()}` : addOneDate2.getDate(),
-          hour: timeObj.date.getHours() + 1 < 9 ? `0${timeObj.date.getHours() + 1}:00` : `${timeObj.date.getHours() + 1}:00`,
-          value: [0, 0, 0, 0]
-        })
+      (goodsRes) => {
+        for (let i = 0; i < imgSrc.length; i++) {
+          wx.uploadFile({
+            url: releaseUrl,
+            filePath: imgSrc[i],
+            header: {
+              "Content-Type": "multipart/form-data"
+            },
+            name: 'images',
+            formData: {
+              'goods_id': goodsRes.data.goods_id
+            },
+            success: function (res) {
+              n++
+              if (n >= imgSrc.length) {
+                wx.hideLoading()
+                wx.showToast({
+                  title: '发布成功',
+                  icon: 'success',
+                  duration: 1000
+                })
+                _this.setData({
+                  errorText: '',
+                  imageSrc: [],
+                  currentLabel: 0,
+                  wechatAc: false,
+                  modalShow: false,
+                  spikeShow: false,
+                  spikeShowTime: false,
+                  spikeShowAc: false,
+                  productShow: false,
+                  productShowAc: false,
+                  productClass: [],
+                  titleVal: '',
+                  descriptionVal: '',
+                  nowPriceVal: '',
+                  oldPriceVal: '',
+                  statusVal: '',
+                  wechatVal: '',
+                  phoneVal: '',
+                  statusNumber: false,
+                  address: '请选择您的位置',
+                  productText: '商品种类',
+                  years: timeObj.years,
+                  months: timeObj.months,
+                  days: timeObj.days,
+                  hours: timeObj.hours,
+                  year: addOneDate2.getFullYear(),
+                  month: (addOneDate2.getMonth() + 1) < 9 ? `0${addOneDate2.getMonth() + 1}` : (addOneDate2.getMonth() + 1),
+                  day: addOneDate2.getDate() < 9 ? `0${addOneDate2.getDate()}` : addOneDate2.getDate(),
+                  hour: timeObj.date.getHours() + 1 < 9 ? `0${timeObj.date.getHours() + 1}:00` : `${timeObj.date.getHours() + 1}:00`,
+                  value: [0, 0, 0, 0]
+                })
+                return
+              }
+            }
+          })
+        }
       })
   },
   formSubmit(ev) {

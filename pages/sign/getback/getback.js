@@ -1,4 +1,4 @@
-import { post } from '../../../api/post.js'
+import { postGetBackVerify, postGetBack } from '../../../api/post.js'
 
 Page({
   data: {
@@ -79,9 +79,7 @@ Page({
       wx.showLoading({
         title: '发送邮件中'
       })
-      post(
-        'http://192.168.0.104/Newlaadmin/index.php/login/backPwd',
-        { email: this.data.emailText },
+      postGetBackVerify({ email: this.data.emailText },
         (res) => {
           wx.hideLoading()
           if (res.data.code === 200) {
@@ -115,9 +113,7 @@ Page({
     wx.showLoading({
       title: '发送邮件中'
     })
-    post(
-      'http://192.168.0.104/Newlaadmin/index.php/login/backPwd',
-      { email: this.data.emailText },
+    postGetBackVerify({ email: this.data.emailText },
       (res) => {
         wx.hideLoading()
         if (res.data.code === 200) {
@@ -215,12 +211,11 @@ Page({
       wx.showLoading({
         title: '修改中'
       })
-      post('http://192.168.0.104/Newlaadmin/index.php/login/savePwd',
-        {
-          email: this.data.emailText,
-          password: this.data.passwordText,
-          confirmPassword: this.data.confirmPasswordText
-        },
+      postGetBack({
+        email: this.data.emailText,
+        password: this.data.passwordText,
+        confirmPassword: this.data.confirmPasswordText
+      },
         (res) => {
           wx.hideLoading()
           console.log(res.data)
