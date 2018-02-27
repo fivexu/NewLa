@@ -132,6 +132,7 @@
   margin-right: 30rpx;
   font-size: 28rpx;
   color: #666;
+  overflow: hidden;
 }
 
 #productDetail .content .label_item.ac {

@@ -1,44 +1,41 @@
 <view id='productDetail'>
   <view class='header'>
     <view class='mode'></view>
-    <image mode='center' src='../../static/image/detail/detail1.jpg'></image>
+    <image mode='center' src='{{detailList.img[0]}}'></image>
     <view class='user' catchtap='toSeller'>
-      <image src='../../static/image/detail/detail1.jpg'></image>
-      <view>用户名字</view>
+      <image src='{{detailList.avatar}}'></image>
+      <view>{{detailList.username}}</view>
     </view>
   </view>
   <view class='content'>
-    <view class='title'>蓝牙音箱迷你文艺可爱九成新噢超漂亮的</view>
+    <view class='title'>{{detailList.title}}</view>
     <view class='flow'>2456·浏览</view>
-    <view class='release_time'>发布于：2018.02.16</view>
+    <view class='release_time'>发布于：{{detailList.time}}</view>
     <view class='price clearfix'>
       <view class='now float_l'>$
-        <text style='font-size:56rpx;line-height: 0;'>1500</text>
+        <text style='font-size:56rpx;line-height: 0;'>{{detailList.sell_price}}</text>
       </view>
-      <view class='old float_l'>$ 2300</view>
-      <view class='float_r' style='font-weight: bolder;color:#666'>9成新</view>
+      <view class='old float_l'>$ {{detailList.buy_price}}</view>
+      <view class='float_r' style='font-weight: bolder;color:#666'>{{detailList.degree}}成新</view>
     </view>
     <view class='shelf_time' wx:if='{{differ>0}}'>
       {{disDay}}天 {{disHour}}小时 {{disMin}}分 {{disSec}}秒后下架
     </view>
     <view class='position' catchtap='openPosition'>
       <image class='float_l' src='../../common/images/nav2.png'></image>
-      <view class='float_l'>卖家定位限定显示字数为十七个汉字长</view>
+      <view class='float_l'>{{detailList.address}}</view>
       <view class='float_r'>距您约2080km</view>
     </view>
     <view class='label'>
-      <view class='label_item ac'>秒杀</view>
-      <view class='label_item'>家具</view>
-      <view class='label_item'>文艺</view>
+      <view class='label_item ac' wx:if='{{detailList.sectime}}'>秒杀</view>
+      <view class='label_item'>{{detailList.type}}</view>
+      <view class='label_item'>{{detailList.label}}</view>
     </view>
     <view class='content_detail'>
-      事实上，南方人吃米、北方人吃面，早已经是过时的老印象了。现在物资丰富，人们想吃什么就吃什么，南方人和北方人的主食差异已经没有那么明显。 南北方人的身高差异不是简单的主食差异造成的，遗传基因是决定不同地区人群生理、性格特征的决定因素，地理因素、气候因素等都会影响人的体质、体型。当然，饮食因素也要考虑，但大米和白面只是饮食的一部分，不能用这一点解释南北身高差。 ⊙⊙大米、白面不是越白越好
+      {{detailList.content}}
     </view>
-    <view class='pic'>
-      <image mode='widthFix' src='../../static/image/detail/detail1.jpg'></image>
-      <image mode='widthFix' src='../../static/image/detail/detail2.jpg'></image>
-      <image mode='widthFix' src='../../static/image/detail/detail3.jpg'></image>
-      <image mode='widthFix' src='../../static/image/detail/detail4.jpg'></image>
+    <view class='pic' wx:for='{{detailList.img}}' wx:key='item' wx:for-index='index'>
+      <image mode='widthFix' src='{{item}}'></image>
     </view>
   </view>
   <view class='comment'>

@@ -1,6 +1,7 @@
 let dataList = require('../../static/data/data.js')
 
 import { getTimes } from '../../common/js/public.js'
+import { getProductDetail } from '../../api/get.js'
 
 Page({
   data: {
@@ -18,7 +19,7 @@ Page({
     sellerCommentFocus: false,
     currentIndex: 0,
     commentList: [],
-    detailList: [],
+    detailList: {},
     latitude: 0,
     longitude: 0,
   },
@@ -54,7 +55,23 @@ Page({
   },
   // 获取详情数据
   getDetail(id) {
-    
+    wx.showLoading({
+      title: '加载中',
+    })
+    getProductDetail(id, (res) => {
+      console.log(res.data)
+      wx.hideLoading()
+      if (res.data.code === 200) {
+        this.setData({
+          detailList: res.data.data
+        })
+        if (res.data.data.sectime) {
+          let sectime = res.data.data.sectime.split('-')
+          console.log(parseInt(sectime[0]), parseInt(sectime[1]), parseInt(sectime[2]), parseInt(sectime[3]))
+          this._shelfTime(parseInt(sectime[0]), parseInt(sectime[1]), parseInt(sectime[2]), parseInt(sectime[3]))
+        }
+      }
+    })
   },
   // 买家给卖家发
   _getDetailList(obj) {
@@ -73,12 +90,12 @@ Page({
     })
   },
   // 下架时间倒计时
-  _shelfTime() {
+  _shelfTime(year, month, day, hour) {
     let timer = null
     let _this = this
     clearInterval(timer)
     timer = setInterval(() => {
-      getTimes(2018, 1, 24, 24, (res) => {
+      getTimes(2018, 2, 28, 21, (res) => {
         _this.setData({
           differ: res.differ,
           disDay: res.disDay,
@@ -100,8 +117,8 @@ Page({
   },
   onLoad: function (res) {
     this._getDetailList()
-    this._shelfTime()
     console.log(res.id)
+    this.getDetail(res.id)
   },
   collect() {
     this.setData({

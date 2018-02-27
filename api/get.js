@@ -12,7 +12,7 @@ export function getHomeProduct(fn) {
 
 // productDetail  获取商品详情
 export function getProductDetail(id, fn) {
-  let url = `?goodsId=${id}`
+  let url = `http://49.51.41.227/newlaadmin/index.php/goods/goodsInfo/goodsId/${id}`
   wx.request({
     url: url,
     method: 'GET',
