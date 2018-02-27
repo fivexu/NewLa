@@ -47,6 +47,14 @@
   position: relative;
   padding-left: 30rpx;
 }
+.productList .address .add {
+  display: inline-block;
+  font-size: 24rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  width: 140rpx;
+  overflow: hidden;
+}
 
 .productList .address .label {
   width: 62rpx;
@@ -59,6 +67,7 @@
   color: #666;
   float: left;
   margin-left: 10rpx;
+  overflow: hidden;
 }
 
 .productList .address .label.ac {

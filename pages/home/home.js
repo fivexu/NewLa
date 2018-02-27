@@ -29,6 +29,11 @@ Page({
   _getProductList() {
     getHomeProduct((res) => {
       console.log(res)
+      if (res.data.code === 200) {
+        this.setData({
+          productList: res.data.data
+        })
+      }
     })
   },
   scrolled(ev) {
@@ -60,7 +65,6 @@ Page({
     let _this = this
     _this.setData({
       slideList: dataList.dataList.data.slider,
-      productList: dataList.dataList.data.productList,
       productClassList: dataList.dataList.data.productClass,
       cityList: dataList.dataList.data.cityList
     })
@@ -169,8 +173,9 @@ Page({
     })
   },
   toDetail(ev) {
+    console.log(ev.currentTarget.dataset.productid)
     wx: wx.navigateTo({
-      url: `../../base/productDetail/productDetail?detail=${ev.currentTarget.dataset.detail}`,
+      url: `../../base/productDetail/productDetail?id=${ev.currentTarget.dataset.productid}`,
       success: function (res) { },
       fail: function (res) { },
       complete: function (res) { },

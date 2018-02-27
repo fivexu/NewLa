@@ -1,3 +1,5 @@
+import { posRegisteredVerify } from '../../../api/post.js'
+
 Page({
   data: {
     topData: {
@@ -93,14 +95,9 @@ Page({
       wx.showLoading({
         title: '正在发送邮件'
       })
-      wx.request({
-        url: 'http://49.51.41.227/newlaAdmin/index.php/login/send_verify',
-        method: 'POST',
-        header: { 'content-type': 'application/x-www-form-urlencoded' },
-        data: {
-          email: _this.data.userEmail
-        },
-        success: function (res) {
+      posRegisteredVerify({ email: _this.data.userEmail },
+        (res) => {
+          console.log(res.data)
           let data = res.data
           wx.hideLoading()
           if (data.code == 200) {
@@ -122,11 +119,7 @@ Page({
             })
             _this.timeoutError()
           }
-        },
-        fail: function (res) {
-          console.log(res)
-        }
-      })
+        })
       this.timeoutAgin()
     }
     this.timeoutError()
@@ -139,14 +132,8 @@ Page({
     wx.showLoading({
       title: '正在重新发送邮件'
     })
-    wx.request({
-      url: 'http://49.51.41.227/newlaAdmin/index.php/login/send_verify',
-      method: 'POST',
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
-      data: {
-        email: _this.data.userEmail
-      },
-      success: function (res) {
+    posRegisteredVerify({ email: _this.data.userEmail },
+      (res) => {
         let data = res.data
         wx.hideLoading()
         if (data.code == 200) {
@@ -155,18 +142,14 @@ Page({
             'topData.currentIndex': 1,
             verify: data.verify
           })
-        }
-        if (data.code == 405) {
+        } else {
           _this.setData({
             error: true,
-            errorText: '该用户已存在,请直接登录或重新注册'
+            errorText: '注册失败,请稍后重试'
           })
           _this.timeoutError()
         }
-      },
-      fail: function (res) {
-      }
-    })
+      })
     this.timeoutAgin()
   },
   userCode(ev) {

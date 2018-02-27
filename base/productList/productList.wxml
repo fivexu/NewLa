@@ -1,8 +1,8 @@
 <template name='productList'>
   <view class='productList'>
     <view class='pics'>
-      <view wx:for='{{img}}' wx:key='index'>
-        <image src='{{item.src}}' lazy-load='../../common/images/loading.png'></image>
+      <view wx:for='{{img}}' wx:key='item' wx:for-index='index' wx:if='{{index<3}}'>
+        <image src='{{item}}' lazy-load='../../common/images/loading.png'></image>
       </view>
     </view>
     <view class='title'>{{title}}
@@ -10,16 +10,17 @@
     </view>
     <view class='address clearfix'>
       <view class='float_l'>
-        <image src='../../common/images/nav2.png'></image> 来自 {{address}}
+        <image src='../../common/images/nav2.png'></image> 
+        <view class='add'>来自 {{address}}</view> 
       </view>
       <view class='float_l' style='margin-top:8rpx;'>
-        <view class='label ac'>秒杀</view>
-        <view class='label'>家具</view>
-        <view class='label'>可爱</view>
+        <view class='label ac' wx:if='{{seckill}}'>秒杀</view>
+        <view class='label'>{{type}}</view>
+        <view class='label'>{{label}}</view>
       </view>
       <view class='float_r'>
-        <text class='old'>${{oldPrice}}</text>
-        <text class='now'>$<text class='nowAc'>{{nowPrice}}</text></text>
+        <text class='old'>${{buy_price}}</text>
+        <text class='now'>$<text class='nowAc'>{{sell_price}}</text></text>
       </view>
     </view>
   </view>

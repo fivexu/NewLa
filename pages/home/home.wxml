@@ -80,7 +80,7 @@
     </view>
     <view class='list_wrapper' style='padding-top:{{scrollTop?"46":"0"}}px'>
       <view class='list'>
-        <view wx:for='{{productList}}' wx:key='item' data-detail='{{item}}' bindtap='toDetail'>
+        <view wx:for='{{productList}}' wx:key='item' data-productid='{{item.id}}' bindtap='toDetail'>
           <template is='productList' data='{{...item}}'></template>
         </view>
       </view>

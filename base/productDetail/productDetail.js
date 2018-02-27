@@ -18,6 +18,7 @@ Page({
     sellerCommentFocus: false,
     currentIndex: 0,
     commentList: [],
+    detailList: [],
     latitude: 0,
     longitude: 0,
   },
@@ -50,6 +51,10 @@ Page({
         // 转发失败
       }
     }
+  },
+  // 获取详情数据
+  getDetail(id) {
+    
   },
   // 买家给卖家发
   _getDetailList(obj) {
@@ -96,6 +101,7 @@ Page({
   onLoad: function (res) {
     this._getDetailList()
     this._shelfTime()
+    console.log(res.id)
   },
   collect() {
     this.setData({
