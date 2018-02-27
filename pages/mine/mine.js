@@ -41,6 +41,7 @@ Page({
                       wx.setStorageSync('nickName', nickName)
                       wx.setStorageSync('avatarUrl', avatar)
                       wx.setStorageSync('email', res.data.data.email)
+                      console.log(wx.getStorageSync('userId'))
                       _this.setData({
                         avatarUrl: avatar,
                         nickName: nickName

@@ -14,12 +14,13 @@ Page({
     userSexAc: false,
     userSexActive: false
   },
-  getInfo() {
+  getInfo(userId) {
     postUserGet({
-      id: wx.getStorageSync('userId')
+      id: wx.getStorageSync('userId') || userId
     },
       (res) => {
         let data = res.data.data
+        console.log(wx.getStorageSync('userId'), data)
         wx.hideLoading()
         if (res.data.code === 200) {
           this.setData({
@@ -46,7 +47,7 @@ Page({
     wx.showLoading({
       title: '加载您的数据中',
     })
-    this.getInfo()
+    this.getInfo(res.userId)
   },
   userNameChange(ev) {
     this.setData({

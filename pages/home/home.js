@@ -1,4 +1,5 @@
 let dataList = require('../../static/data/data.js')
+import { getHomeProduct } from '../../api/get.js'
 
 Page({
   data: {
@@ -24,6 +25,11 @@ Page({
       school: '学校',
     },
     scrollTop: false
+  },
+  _getProductList() {
+    getHomeProduct((res) => {
+      console.log(res)
+    })
   },
   scrolled(ev) {
     let arr = this.data.productList
@@ -61,6 +67,7 @@ Page({
   },
   onLoad: function () {
     this._getSlideList()
+    this._getProductList()
   },
   prevent: function (ev) {
   },
