@@ -213,6 +213,7 @@ Page({
   fromContent(val) {
     let spikeTime = `${this.data.year}-${this.data.month}-${this.data.day} ${this.data.hour}`
     spikeTime = this.data.spikeShow ? spikeTime : ''
+    console.log(spikeTime)
     let labelText = this.data.label
     let imgSrc = this.data.imageSrc
     let _this = this

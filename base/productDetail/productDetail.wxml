@@ -9,7 +9,7 @@
   </view>
   <view class='content'>
     <view class='title'>{{detailList.title}}</view>
-    <view class='flow'>2456·浏览</view>
+    <view class='flow'>{{detailList.num}}·浏览</view>
     <view class='release_time'>发布于：{{detailList.time}}</view>
     <view class='price clearfix'>
       <view class='now float_l'>$

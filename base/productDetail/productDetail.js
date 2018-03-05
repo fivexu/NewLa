@@ -59,7 +59,6 @@ Page({
       title: '加载中',
     })
     getProductDetail(id, (res) => {
-      console.log(res.data)
       wx.hideLoading()
       if (res.data.code === 200) {
         this.setData({
@@ -67,8 +66,8 @@ Page({
         })
         if (res.data.data.sectime) {
           let sectime = res.data.data.sectime.split('-')
-          console.log(parseInt(sectime[0]), parseInt(sectime[1]), parseInt(sectime[2]), parseInt(sectime[3]))
-          this._shelfTime(parseInt(sectime[0]), parseInt(sectime[1]), parseInt(sectime[2]), parseInt(sectime[3]))
+          console.log(sectime)
+          this._shelfTime(Number(sectime[0]), Number(sectime[1]), Number(sectime[2]), Number(sectime[3]))
         }
       }
     })
@@ -95,7 +94,7 @@ Page({
     let _this = this
     clearInterval(timer)
     timer = setInterval(() => {
-      getTimes(2018, 2, 28, 21, (res) => {
+      getTimes(year, month, day, hour, (res) => {
         _this.setData({
           differ: res.differ,
           disDay: res.disDay,

@@ -101,9 +101,10 @@ export function oponCamare(fn, num = 8) {
   })
 }
 export function getTimes(year, month, day, hour, fn) {
-  let date1 = new Date(year, month, day, hour).getTime()
+  let date1 = new Date(year, month - 1, day, hour).getTime()
   let date2 = new Date().getTime()
   let obj = {}
+  console.log(Math.floor((date1 - date2) / (60 * 60 * 24 * 1000 * 30)))
   obj.differ = date1 - date2
   obj.disMSe = Math.floor(date1 - date2) % 100
   obj.disSec = Math.floor((date1 - date2) / (1000)) % 60
