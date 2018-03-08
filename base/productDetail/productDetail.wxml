@@ -79,7 +79,7 @@
     <view class='operating_phone' catchtap='contactTo'>联系卖家</view>
   </view>
   <view class='speech_text' catchtouchmove='prevent' wx:if='{{commentAc}}' style='height:{{commentFocus?"860rpx":"270rpx"}}'>
-    <text>回复</text>
+    <text catchtap='commentFinish'>回复</text>
     <textarea maxlength='100' bindconfirm='commentFinish' catchtouchmove='prevent' bindfocus='commentIn' bindblur='commentOut'></textarea>
   </view>
   <view class='speech_text' catchtouchmove='prevent' wx:if='{{sellerCommentAc}}' style='height:{{sellerCommentFocus?"860rpx":"270rpx"}}'>
@@ -91,8 +91,8 @@
       <view class='text' style='font-size: 24rpx'>扫一扫</view>
       <image src='../../static/image/detail/detail1.jpg'></image>
     </view>
-    <view class='text' style='font-size: 28rpx;padding-bottom: 40rpx;'>微信号:aaaa</view>
-    <view class='phone_number'>电话号码: 123456789</view>
+    <view class='text' style='font-size: 28rpx;padding-bottom: 40rpx;'>微信号:{{detailList.wechat}}</view>
+    <view class='phone_number'>电话号码: {{detailList.phone}}</view>
     <view class='btn'>
       <view class='btn_item' catchtap='contactTo'>取消</view>
       <view class='btn_item ac' catchtap='phoneTo'>确定</view>

@@ -162,4 +162,16 @@ export function postRelease(data, fn) {
   })
 }
 
-
+// productDetail 商品详情
+export function postDetailTalk(data, fn) {
+  let url = 'http://49.51.41.227/newlaadmin/index.php/goods/messageTo'
+  wx.request({
+    url: url,
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    data: data,
+    success: function (res) {
+      fn(res)
+    }
+  })
+}

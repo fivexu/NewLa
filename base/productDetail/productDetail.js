@@ -2,6 +2,7 @@ let dataList = require('../../static/data/data.js')
 
 import { getTimes } from '../../common/js/public.js'
 import { getProductDetail } from '../../api/get.js'
+import { postDetailTalk } from '../../api/post.js'
 
 Page({
   data: {
@@ -22,6 +23,7 @@ Page({
     detailList: {},
     latitude: 0,
     longitude: 0,
+    goodsId: 0
   },
   prevent: function (ev) {
   },
@@ -62,11 +64,12 @@ Page({
       wx.hideLoading()
       if (res.data.code === 200) {
         this.setData({
-          detailList: res.data.data
+          detailList: res.data.data,
+          goodsId: res.data.data.id
         })
+        console.log(res.data.data)
         if (res.data.data.sectime) {
           let sectime = res.data.data.sectime.split('-')
-          console.log(sectime)
           this._shelfTime(Number(sectime[0]), Number(sectime[1]), Number(sectime[2]), Number(sectime[3]))
         }
       }
@@ -116,7 +119,6 @@ Page({
   },
   onLoad: function (res) {
     this._getDetailList()
-    console.log(res.id)
     this.getDetail(res.id)
   },
   collect() {
@@ -160,12 +162,23 @@ Page({
     })
   },
   commentFinish(ev) {
+    if (ev.detail.value === '' || ev.detail.length <= 0) {
+      return
+    }
     let obj = {
       avatar: '../../static/image/detail/detail2.jpg',
       name: 'buyer3',
       talk: ev.detail.value,
       talkTime: '1分钟前'
     }
+    postDetailTalk({
+      userId: wx.getStorageSync('userId'),
+      content: ev.detail.value,
+      goodsId: this.data.goodsId
+    },
+      (res) => {
+        console.log(res)
+      })
     this._getDetailList(obj)
     this.setData({
       commentFocus: false,
