@@ -45,9 +45,7 @@ Page({
           wx.setStorageSync('avatarUrl', res.data.data.avatar)
           wx.setStorageSync('email', this.data.email)
           setTimeout(() => {
-            wx.switchTab({
-              url: '../../mine/mine',
-            })
+            wx.navigateBack()
           }, 1000)
         } else if (res.data.code === 400) {
           this.setData({
