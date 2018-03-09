@@ -1,5 +1,3 @@
-let dataList = require('../../static/data/data.js')
-
 import { getTimes } from '../../common/js/public.js'
 import { getProductDetail } from '../../api/get.js'
 import { postDetailTalk } from '../../api/post.js'
@@ -23,7 +21,8 @@ Page({
     detailList: {},
     latitude: 0,
     longitude: 0,
-    goodsId: 0
+    goodsId: -1,
+    messageId: -1
   },
   prevent: function (ev) {
   },
@@ -65,7 +64,8 @@ Page({
       if (res.data.code === 200) {
         this.setData({
           detailList: res.data.data,
-          goodsId: res.data.data.id
+          goodsId: res.data.data.id,
+          commentList: res.data.data.message
         })
         console.log(res.data.data)
         if (res.data.data.sectime) {
@@ -77,7 +77,7 @@ Page({
   },
   // 买家给卖家发
   _getDetailList(obj) {
-    let commentLists = dataList.dataList.data.commentList
+    let commentLists = this.data.commentList
     obj ? commentLists[commentLists.length] = obj : ''
     this.setData({
       commentList: commentLists
@@ -85,7 +85,7 @@ Page({
   },
   // 卖家给买家发
   _getDetailListSeller(obj, index) {
-    let commentLists = dataList.dataList.data.commentList
+    let commentLists = this.data.commentList
     commentLists[index].callback[commentLists[index].callback.length] = obj
     this.setData({
       commentList: commentLists
@@ -118,7 +118,7 @@ Page({
     })
   },
   onLoad: function (res) {
-    this._getDetailList()
+    // this._getDetailList()
     this.getDetail(res.id)
   },
   collect() {
@@ -178,12 +178,12 @@ Page({
     },
       (res) => {
         console.log(res)
+        this._getDetailList(obj)
+        this.setData({
+          commentFocus: false,
+          commentAc: false
+        })
       })
-    this._getDetailList(obj)
-    this.setData({
-      commentFocus: false,
-      commentAc: false
-    })
   },
   sellerCommentIn(ev) {
     let _this = this
@@ -210,11 +210,20 @@ Page({
       talk: ev.detail.value,
       talkTime: '1分钟前'
     }
-    this._getDetailListSeller(obj, this.data.currentIndex)
-    this.setData({
-      sellerCommentFocus: false,
-      sellerCommentAc: false
-    })
+    postDetailTalk({
+      userId: wx.getStorageSync('userId'),
+      content: ev.detail.value,
+      goodsId: this.data.goodsId,
+      messageId: this.data.messageId
+    },
+      (res) => {
+        console.log(res)
+        this._getDetailListSeller(obj, this.data.currentIndex)
+        this.setData({
+          sellerCommentFocus: false,
+          sellerCommentAc: false
+        })
+      })
   },
   phoneTo() {
     wx.makePhoneCall({
@@ -233,8 +242,11 @@ Page({
   },
   replyBuyer(ev) {
     let index = ev.currentTarget.dataset.index
+    let messageId = ev.currentTarget.dataset.messageid
+    console.log(messageId)
     this.setData({
       currentIndex: index,
+      messageId: messageId,
       sellerCommentAc: !this.data.sellerCommentAc,
       sellerContactAc: false
     })

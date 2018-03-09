@@ -40,16 +40,16 @@
   </view>
   <view class='comment'>
     <view class='title'>
-      <text>评论 (2536)</text>
+      <text>评论 ({{detailList.messageCount}})</text>
     </view>
     <view class='comment_list clearfix'>
       <view wx:for='{{commentList}}' wx:key='index' class='comment_item'>
         <view class='user_wrapper'>
           <view class='user' catchtap='toSeller'>
             <image src='{{item.avatar}}'></image>
-            <text>{{item.name}}</text>
+            <text>{{item.username}}</text>
           </view>
-          <view class='user_talk' data-index='{{index}}' catchtap='replyBuyer'>{{item.talk}}</view>
+          <view class='user_talk' data-index='{{index}}' data-messageId='{{item.messageId}}' catchtap='replyBuyer'>{{item.talk}}</view>
           <view class='talk_time'>
             {{item.talkTime}}
             <image src='./warning.png' catchtap='toReport'></image>
@@ -58,9 +58,9 @@
         <view class='user_wrapper ac' wx:for='{{item.callback}}' wx:key='index' wx:for-item='items'>
           <view class='user'>
             <image src='{{items.avatar}}'></image>
-            <text>{{items.name}}</text>
+            <text>{{items.username}}</text>
           </view>
-          <view class='user_talk' data-index='{{index}}' catchtap='replyBuyer'>{{items.talk}}</view>
+          <view class='user_talk' data-index='{{index}}' data-messageId='{{item.messageId}}' catchtap='replyBuyer'>{{items.talk}}</view>
           <view class='talk_time'>{{items.talkTime}}</view>
         </view>
       </view>

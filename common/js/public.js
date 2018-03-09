@@ -70,6 +70,7 @@ export function getDays(month, year) {
   }
   return days
 }
+
 export function getHours(hour) {
   hours = []
   if (hour > date.getDate()) {
@@ -89,6 +90,7 @@ export function getHours(hour) {
   }
   return hours
 }
+
 export function oponCamare(fn, num = 8) {
   wx.chooseImage({
     count: num,
@@ -100,11 +102,11 @@ export function oponCamare(fn, num = 8) {
     }
   })
 }
+
 export function getTimes(year, month, day, hour, fn) {
   let date1 = new Date(year, month - 1, day, hour).getTime()
   let date2 = new Date().getTime()
   let obj = {}
-  console.log(year, month - 1, day, hour)
   obj.differ = date1 - date2
   obj.disMSe = Math.floor(date1 - date2) % 100
   obj.disSec = Math.floor((date1 - date2) / (1000)) % 60
